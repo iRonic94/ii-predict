@@ -1,7 +1,6 @@
 import { supabase } from '../lib/supabase';
 
 export async function register({ nickname, email, password }) {
-    // Creează utilizatorul în Auth
     const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -11,7 +10,13 @@ export async function register({ nickname, email, password }) {
         return { data: null, error };
     }
 
-    // Creează profilul
+    if (!data.user) {
+        return {
+            data: null,
+            error: new Error('User could not be created.'),
+        };
+    }
+
     const { error: profileError } = await supabase
         .from('profiles')
         .insert({
@@ -21,19 +26,14 @@ export async function register({ nickname, email, password }) {
         });
 
     if (profileError) {
-        return { data: null, error: profileError };
+        return {
+            data: null,
+            error: profileError,
+        };
     }
 
-    return { data, error: null };
-}
-
-export async function login(email, password) {
-    return await supabase.auth.signInWithPassword({
-        email,
-        password,
-    });
-}
-
-export async function logout() {
-    return await supabase.auth.signOut();
+    return {
+        data,
+        error: null,
+    };
 }
