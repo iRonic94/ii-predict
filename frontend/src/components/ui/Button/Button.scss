@@ -1,0 +1,26 @@
+@use '../../../styles/abstracts/variables' as *;
+
+.button {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 12px;
+    background: $primary;
+    color: #0f172a;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s ease;
+
+    &:hover:not(:disabled) {
+        background: #d97706;
+    }
+
+    &:disabled {
+        opacity: .6;
+        cursor: not-allowed;
+    }
+
+    &--full {
+        width: 100%;
+    }
+}
