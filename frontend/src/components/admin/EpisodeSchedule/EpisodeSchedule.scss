@@ -1,0 +1,40 @@
+@use '../../../styles/abstracts/variables' as *;
+
+.episode-schedule {
+    margin-top: 2rem;
+    padding: 2rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, .04);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.schedule-field {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+}
+
+.schedule-field label {
+    color: white;
+    font-weight: 600;
+}
+
+.schedule-field input {
+    padding: .9rem;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .08);
+    color: white;
+}
+
+.schedule-field input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
