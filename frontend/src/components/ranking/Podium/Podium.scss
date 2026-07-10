@@ -1,0 +1,121 @@
+@use '../../../styles/abstracts/variables' as *;
+
+.podium {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 2rem;
+    margin: 3rem 0 4rem;
+}
+
+.podium-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2,
+    h3 {
+        color: white;
+        margin-top: 1rem;
+    }
+
+    span {
+        color: rgba(255, 255, 255, .7);
+        margin-top: .3rem;
+        margin-bottom: 1rem;
+    }
+}
+
+.podium-avatar {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+}
+
+.first .podium-avatar {
+    width: 110px;
+    height: 110px;
+    font-size: 2.5rem;
+}
+
+.gold {
+    background: linear-gradient(135deg, #f7d24a, #d89b00);
+}
+
+.silver {
+    background: linear-gradient(135deg, #d7dce3, #aab1ba);
+    color: #1e1e1e;
+}
+
+.bronze {
+    background: linear-gradient(135deg, #cf8347, #91532b);
+}
+
+.podium-rank {
+    position: absolute;
+    right: -6px;
+    top: -6px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .9rem;
+    color: white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .35);
+}
+
+.first .podium-rank {
+    width: 42px;
+    height: 42px;
+    font-size: 1rem;
+}
+
+.podium-crown {
+    color: #f7d24a;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.podium-base {
+    width: 170px;
+    border-radius: 18px 18px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 4rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, .2);
+}
+
+.first .podium-base {
+    height: 220px;
+}
+
+.second .podium-base {
+    height: 170px;
+}
+
+.third .podium-base {
+    height: 140px;
+}
+
+.podium-base.gold {
+    background: linear-gradient(180deg, #f4c842, #ce9200);
+}
+
+.podium-base.silver {
+    background: linear-gradient(180deg, #d7dce3, #9ea7b2);
+}
+
+.podium-base.bronze {
+    background: linear-gradient(180deg, #c97a3e, #8b4c26);
+}
