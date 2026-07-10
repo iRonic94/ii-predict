@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import './Navbar.scss';
+import logo from '../../../assets/iconIIpredict.png'
 
 import { useAuth } from '../../../hooks/useAuth';
 
@@ -26,9 +27,18 @@ function Navbar() {
                 className="navbar-logo"
                 onClick={() => navigate(ROUTES.VOTE)}
             >
-                🏝️  Insula Predicției
-            </div>
 
+                <img
+                    src={logo}
+                    alt="Insula Predicției"
+                    className="navbar-logo-icon"
+                />
+
+                <span className="navbar-logo-text">
+                    Insula Predicției
+                </span>
+
+            </div>
             <nav className="navbar-nav">
 
                 <NavLink

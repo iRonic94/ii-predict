@@ -14,10 +14,23 @@
 }
 
 .navbar-logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: $primary;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
     cursor: pointer;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+}
+
+.navbar-logo-icon {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.navbar-logo-text {
+    white-space: nowrap;
 }
 
 .navbar-nav {
