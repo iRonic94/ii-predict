@@ -8,6 +8,24 @@ export async function getProfile(userId) {
         .single();
 }
 
+export async function createProfile(user) {
+
+    const nickname =
+        user.user_metadata?.full_name ||
+        user.user_metadata?.name ||
+        user.email.split('@')[0];
+
+    return await supabase
+        .from('profiles')
+        .insert({
+            id: user.id,
+            email: user.email,
+            nickname,
+            total_points: 0,
+        });
+
+}
+
 export async function getRanking() {
     return await supabase
         .from('profiles')

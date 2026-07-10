@@ -22,3 +22,12 @@ export async function login(email, password) {
 export async function logout() {
     return await supabase.auth.signOut();
 }
+
+export async function signInWithGoogle() {
+    return await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+            redirectTo: `${window.location.origin}/vote`,
+        },
+    });
+}

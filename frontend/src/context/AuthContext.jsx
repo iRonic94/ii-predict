@@ -2,7 +2,11 @@ import { createContext, useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 
 import { login, register, logout } from '../services/authService';
-import { getProfile } from '../services/profileService';
+
+import {
+    getProfile,
+    createProfile,
+} from '../services/profileService';
 
 export const AuthContext = createContext(null);
 

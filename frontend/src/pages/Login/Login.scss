@@ -1,34 +1,48 @@
-@use '../../styles/abstracts/variables' as *;
-
-.login-form {
+.login-divider {
     display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
+    align-items: center;
+    margin: 1.5rem 0;
+    color: rgba(255, 255, 255, .45);
 }
 
-.login-error {
-    color: #ff5b5b;
-    text-align: center;
+.login-divider::before,
+.login-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, .12);
+}
+
+.login-divider span {
+    padding: 0 1rem;
+}
+
+.google-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .75rem;
+    padding: .9rem;
+    border: none;
+    border-radius: 12px;
+    background: #fff;
+    color: #111;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.google-button:hover {
+    transform: translateY(-2px);
+}
+
+.google-button img {
+    width: 22px;
+    height: 22px;
 }
 
 .login-footer {
     margin-top: 1.5rem;
-    text-align: center;
-    color: rgba(255, 255, 255, .65);
-
-    a {
-        color: white;
-        text-decoration: none;
-        font-weight: 600;
-        margin-left: .35rem;
-        transition: .25s;
-
-        &:hover {
-
-            color: $primary;
-
-        }
-
-    }
-
 }

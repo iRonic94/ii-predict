@@ -8,9 +8,12 @@ import AuthLayout from '../../components/auth/AuthLayout/AuthLayout';
 import { useAuth } from '../../hooks/useAuth';
 import { ROUTES } from '../../constants/routes';
 
+import { signInWithGoogle } from '../../services/authService';
+
 import './Login.scss';
 
 function Login() {
+
     const navigate = useNavigate();
 
     const { login } = useAuth();
@@ -24,15 +27,18 @@ function Login() {
     const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
+
         const { name, value } = e.target;
 
         setFormData((prev) => ({
             ...prev,
             [name]: value,
         }));
+
     };
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
 
         setError('');
@@ -43,6 +49,7 @@ function Login() {
         }
 
         try {
+
             setLoading(true);
 
             const { error } = await login(
@@ -58,13 +65,27 @@ function Login() {
             navigate(ROUTES.VOTE);
 
         } finally {
+
             setLoading(false);
+
         }
+
+    };
+
+    const handleGoogleLogin = async () => {
+
+        const { error } = await signInWithGoogle();
+
+        if (error) {
+            setError(error.message);
+        }
+
     };
 
     return (
+
         <AuthLayout
-            title="Login👹👇"
+            title="Login"
         >
 
             <form
@@ -101,21 +122,45 @@ function Login() {
                     fullWidth
                     disabled={loading}
                 >
-                    {loading ? 'Te loghez imediat...' : 'Logheaza-te'}
+                    {loading
+                        ? 'Se autentifică...'
+                        : 'Loghează-te'}
                 </Button>
 
             </form>
 
+            <div className="login-divider">
+                <span>sau</span>
+            </div>
+
+            <button
+                type="button"
+                className="google-button"
+                onClick={handleGoogleLogin}
+            >
+                <img
+                    src="https://www.svgrepo.com/show/475656/google-color.svg"
+                    alt="Google"
+                />
+
+                Continuă cu Google
+
+            </button>
+
             <p className="login-footer">
-                N-ai incă cont?
+
+                N-ai încă cont?
 
                 <Link to={ROUTES.REGISTER}>
-                    Dă click/tap aici!
+                    Creează unul
                 </Link>
+
             </p>
 
         </AuthLayout>
+
     );
+
 }
 
 export default Login;
