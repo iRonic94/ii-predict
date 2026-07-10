@@ -5,7 +5,7 @@ import { login, register, logout } from '../services/authService';
 
 import {
     getProfile,
-    createProfile,
+    upsertProfile,
 } from '../services/profileService';
 
 export const AuthContext = createContext(null);
@@ -28,27 +28,21 @@ export function AuthProvider({ children }) {
 
             let { data, error } = await getProfile(user.id);
 
-            console.log('PROFILE DATA:', data);
-            console.log('PROFILE ERROR:', error);
-
             if (error?.code === 'PGRST116') {
 
-                console.log('Creating Google profile...');
+                const {
+                    profile,
+                    error: upsertError,
+                } = await upsertProfile(user);
 
-                const { error: createError } =
-                    await createProfile(user);
-
-                if (createError) {
-                    console.error('CREATE PROFILE ERROR:', createError);
+                if (upsertError) {
+                    console.error(upsertError);
                     setProfile(null);
                     return;
                 }
 
-                const response =
-                    await getProfile(user.id);
-
-                data = response.data;
-                error = response.error;
+                setProfile(profile);
+                return;
 
             }
 
@@ -62,39 +56,47 @@ export function AuthProvider({ children }) {
 
         };
 
-        const getSession = async () => {
+        const initializeSession = async () => {
 
             const {
                 data: { session },
-                error,
             } = await supabase.auth.getSession();
-
-            console.log('SESSION:', session);
-            console.log('SESSION ERROR:', error);
 
             setSession(session);
             setUser(session?.user ?? null);
 
-            await loadProfile(session?.user);
+            if (session?.user) {
+                await loadProfile(session.user);
+            }
 
             setLoading(false);
 
         };
 
-        getSession();
+        initializeSession();
 
         const {
             data: { subscription },
         } = supabase.auth.onAuthStateChange(
-            async (_event, session) => {
-
-                console.log('AUTH EVENT:', _event);
-                console.log('NEW SESSION:', session);
+            async (event, session) => {
 
                 setSession(session);
                 setUser(session?.user ?? null);
 
-                await loadProfile(session?.user);
+                switch (event) {
+
+                    case 'SIGNED_IN':
+                        await loadProfile(session?.user);
+                        break;
+
+                    case 'SIGNED_OUT':
+                        setProfile(null);
+                        break;
+
+                    default:
+                        break;
+
+                }
 
                 setLoading(false);
 
