@@ -139,7 +139,7 @@ function Vote() {
 
             <EpisodeSelector
                 episodes={episodes}
-                activeEpisode={selectedEpisode}
+                selectedEpisode={selectedEpisode}
                 onSelect={setSelectedEpisode}
             />
 

@@ -1,3 +1,5 @@
+import { useNow } from '../../../hooks/useNow'
+
 import './EpisodeSelector.scss';
 
 function EpisodeSelector({
@@ -7,12 +9,13 @@ function EpisodeSelector({
     selectable = false,
 }) {
 
-    const now = new Date();
+    const now = useNow();
 
     const getStatus = (episode) => {
 
         const opensAt = new Date(episode.opens_at);
         const closesAt = new Date(episode.closes_at);
+
 
         if (now < opensAt) {
             return 'locked';
@@ -21,7 +24,6 @@ function EpisodeSelector({
         if (now > closesAt) {
             return 'closed';
         }
-
         return 'active';
     };
 

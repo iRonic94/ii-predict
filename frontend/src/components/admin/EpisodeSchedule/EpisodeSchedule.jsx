@@ -4,6 +4,11 @@ import Button from '../../ui/Button/Button';
 
 import { updateEpisodeDates } from '../../../services/episodeService';
 
+import {
+    toDateTimeLocal,
+    fromDateTimeLocal,
+} from '../../../utils/date';
+
 import './EpisodeSchedule.scss';
 
 function EpisodeSchedule({
@@ -21,25 +26,21 @@ function EpisodeSchedule({
         }
 
         setOpensAt(
-            episode.opens_at
-                ? episode.opens_at.slice(0, 16)
-                : ''
+            toDateTimeLocal(episode.opens_at)
         );
 
         setClosesAt(
-            episode.closes_at
-                ? episode.closes_at.slice(0, 16)
-                : ''
+            toDateTimeLocal(episode.closes_at)
         );
 
     }, [episode]);
 
     const handleSave = async () => {
 
-        const { error } = await updateEpisodeDates(
+        const { error } = await await updateEpisodeDates(
             episode.id,
-            opensAt,
-            closesAt
+            fromDateTimeLocal(opensAt),
+            fromDateTimeLocal(closesAt)
         );
 
         if (error) {
