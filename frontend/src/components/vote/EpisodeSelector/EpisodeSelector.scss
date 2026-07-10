@@ -1,0 +1,77 @@
+@use '../../../styles/abstracts/variables' as *;
+
+.episode-selector {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: .75rem;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, .2) transparent;
+    scroll-snap-type: x proximity;
+}
+
+.episode-card {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    flex: 0 0 auto;
+    min-width: 170px;
+    padding: 1rem;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    background: rgba(255, 255, 255, .04);
+    cursor: pointer;
+    transition: border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+    scroll-snap-align: start;
+}
+
+.episode-card:hover:not(.locked) {
+    border-color: rgba(255, 255, 255, .15);
+}
+
+.episode-card.selected {
+    border-color: $primary;
+    box-shadow: 0 0 20px rgba($primary, .35);
+}
+
+.episode-card.locked {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.episode-card.closed {
+    opacity: .7;
+}
+
+.episode-title {
+    font-weight: 700;
+    color: white;
+}
+
+.episode-status {
+    font-size: .85rem;
+    color: rgba(255, 255, 255, .65);
+}
+
+/* Chrome / Edge */
+
+.episode-selector::-webkit-scrollbar {
+    height: 6px;
+}
+
+.episode-selector::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.episode-selector::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .18);
+    border-radius: 999px;
+}
+
+.episode-selector::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, .35);
+}
