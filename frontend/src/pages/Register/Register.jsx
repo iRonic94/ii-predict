@@ -79,8 +79,8 @@ function Register() {
 
     return (
         <AuthLayout
-            title="Create Account"
-            subtitle="Join the prediction game"
+            title="Creaza cont"
+            subtitle="Sumset is back!"
         >
 
             <form
