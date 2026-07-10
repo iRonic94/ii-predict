@@ -11,6 +11,7 @@ import {
 export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
+
     const [user, setUser] = useState(null);
     const [session, setSession] = useState(null);
     const [profile, setProfile] = useState(null);
@@ -25,14 +26,40 @@ export function AuthProvider({ children }) {
                 return;
             }
 
-            const { data, error } = await getProfile(user.id);
+            let { data, error } = await getProfile(user.id);
+
+            console.log('PROFILE DATA:', data);
+            console.log('PROFILE ERROR:', error);
+
+            if (error?.code === 'PGRST116') {
+
+                console.log('Creating Google profile...');
+
+                const { error: createError } =
+                    await createProfile(user);
+
+                if (createError) {
+                    console.error('CREATE PROFILE ERROR:', createError);
+                    setProfile(null);
+                    return;
+                }
+
+                const response =
+                    await getProfile(user.id);
+
+                data = response.data;
+                error = response.error;
+
+            }
 
             if (error) {
+                console.error(error);
                 setProfile(null);
                 return;
             }
 
             setProfile(data);
+
         };
 
         const getSession = async () => {
@@ -51,25 +78,28 @@ export function AuthProvider({ children }) {
             await loadProfile(session?.user);
 
             setLoading(false);
+
         };
 
         getSession();
 
         const {
             data: { subscription },
-        } = supabase.auth.onAuthStateChange(async (_event, session) => {
+        } = supabase.auth.onAuthStateChange(
+            async (_event, session) => {
 
-            console.log('AUTH EVENT:', _event);
-            console.log('NEW SESSION:', session);
+                console.log('AUTH EVENT:', _event);
+                console.log('NEW SESSION:', session);
 
-            setSession(session);
-            setUser(session?.user ?? null);
+                setSession(session);
+                setUser(session?.user ?? null);
 
-            await loadProfile(session?.user);
+                await loadProfile(session?.user);
 
-            setLoading(false);
+                setLoading(false);
 
-        });
+            }
+        );
 
         return () => subscription.unsubscribe();
 
@@ -90,4 +120,5 @@ export function AuthProvider({ children }) {
             {children}
         </AuthContext.Provider>
     );
+
 }
