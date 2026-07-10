@@ -10,19 +10,10 @@ export async function getProfile(userId) {
 
 export async function createProfile(user) {
 
-    console.log('CREATE PROFILE CALLED');
-    console.log(user);
-
     const nickname =
         user.user_metadata?.full_name ||
         user.user_metadata?.name ||
         user.email.split('@')[0];
-
-    console.log({
-        id: user.id,
-        email: user.email,
-        nickname,
-    });
 
     return await supabase
         .from('profiles')
