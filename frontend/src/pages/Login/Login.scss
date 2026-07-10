@@ -1,8 +1,27 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 1.75rem;
+}
+
+.login-error {
+    padding: .85rem 1rem;
+    border: 1px solid rgba(255, 80, 80, .35);
+    border-radius: 12px;
+    background: rgba(255, 80, 80, .08);
+    color: #ff7a7a;
+    font-size: .95rem;
+    text-align: center;
+}
+
 .login-divider {
     display: flex;
     align-items: center;
-    margin: 1.5rem 0;
+    margin: 1.75rem 0;
     color: rgba(255, 255, 255, .45);
+    font-size: .9rem;
+    font-weight: 500;
 }
 
 .login-divider::before,
@@ -20,29 +39,66 @@
 .google-button {
     width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: .75rem;
-    padding: .9rem;
-    border: none;
-    border-radius: 12px;
+    justify-content: center;
+    gap: .9rem;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 14px;
     background: #fff;
-    color: #111;
+    color: #1f1f1f;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: .25s;
+    transition: all .25s ease;
 }
 
 .google-button:hover {
     transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, .15);
+}
+
+.google-button:active {
+    transform: translateY(0);
 }
 
 .google-button img {
     width: 22px;
     height: 22px;
+    object-fit: contain;
 }
 
 .login-footer {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .45rem;
+    flex-wrap: wrap;
+    font-size: .95rem;
+    color: rgba(255, 255, 255, .7);
+}
+
+.login-footer a {
+    color: var(--primary-color, #ffffff);
+    font-weight: 700;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.login-footer a:hover {
+    opacity: .8;
+}
+
+@media(max-width:768px) {
+
+    .login-form {
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .google-button {
+        padding: .9rem;
+    }
+
 }
