@@ -21,6 +21,7 @@ function Register() {
     });
 
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -36,23 +37,27 @@ function Register() {
 
         setError('');
 
-        if (formData.password !== formData.confirmPassword) {
-            setError('Passwords do not match.');
-            return;
+        try {
+            setLoading(true);
+
+            const { error } = await register({
+                nickname: formData.nickname.trim(),
+                email: formData.email.trim(),
+                password: formData.password,
+            });
+
+            if (error) {
+                setError(error.message);
+                return;
+            }
+
+            navigate(ROUTES.LOGIN);
+
+        } catch (err) {
+            setError(err.message || 'Something went wrong.');
+        } finally {
+            setLoading(false);
         }
-
-        const { error } = await register({
-            nickname: formData.nickname,
-            email: formData.email,
-            password: formData.password,
-        });
-
-        if (error) {
-            setError(error.message);
-            return;
-        }
-
-        navigate(ROUTES.LOGIN);
     };
 
     return (
