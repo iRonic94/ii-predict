@@ -85,9 +85,8 @@ function Login() {
     return (
 
         <AuthLayout
-            title="Login"
+            title="Login👹👇"
         >
-
             <form
                 className="login-form"
                 onSubmit={handleSubmit}
@@ -122,9 +121,7 @@ function Login() {
                     fullWidth
                     disabled={loading}
                 >
-                    {loading
-                        ? 'Se autentifică...'
-                        : 'Loghează-te'}
+                    {loading ? 'Te loghez imediat...' : 'Logheaza-te'}
                 </Button>
 
             </form>
@@ -148,11 +145,9 @@ function Login() {
             </button>
 
             <p className="login-footer">
-
                 N-ai încă cont?
-
                 <Link to={ROUTES.REGISTER}>
-                    Creează unul
+                    Dă click/tap aici!
                 </Link>
 
             </p>
