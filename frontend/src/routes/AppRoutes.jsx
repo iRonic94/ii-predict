@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ProtectedRoute from '../components/common/ProtectedRouter';
+import ProtectedRoute from '../components/common/ProtectedRoute';
 
 import Home from '../pages/Home/Home'
 import Login from '../pages/Login/Login';
@@ -28,7 +28,7 @@ function AppRoutes() {
                 <Route
                     path="/admin"
                     element={
-                        <ProtectedRoute>
+                        <ProtectedRoute requireAdmin>
                             <Admin />
                         </ProtectedRoute>
                     }

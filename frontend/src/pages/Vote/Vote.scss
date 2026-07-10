@@ -1,0 +1,28 @@
+.vote-page {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.vote-info {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.vote-message {
+    color: #ef4444;
+    font-size: .95rem;
+}
+
+.empty-state {
+    text-align: center;
+    font-size: 1.1rem;
+    opacity: .8;
+    padding: 3rem 0;
+}
+
+.contestants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+}

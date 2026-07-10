@@ -23,12 +23,6 @@ export function AuthProvider({ children }) {
 
             const { data, error } = await getProfile(user.id);
 
-            console.log('========== PROFILE DEBUG ==========');
-            console.log('USER ID:', user.id);
-            console.log('PROFILE DATA:', data);
-            console.log('PROFILE ERROR:', error);
-            console.log('===================================');
-
             if (error) {
                 setProfile(null);
                 return;
