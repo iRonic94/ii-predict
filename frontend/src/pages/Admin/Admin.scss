@@ -1,0 +1,16 @@
+.admin-page {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.admin-info {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.contestants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+}
