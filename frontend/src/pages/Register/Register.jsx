@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-import Card from '../../components/ui/Card/Card';
 import Input from '../../components/ui/Input/Input';
 import Button from '../../components/ui/Button/Button';
+import AuthLayout from '../../components/auth/AuthLayout/AuthLayout';
 
 import { useAuth } from '../../hooks/useAuth';
 import { ROUTES } from '../../constants/routes';
+
+import './Register.scss';
 
 function Register() {
     const navigate = useNavigate();
@@ -37,6 +39,21 @@ function Register() {
 
         setError('');
 
+        if (
+            !formData.nickname.trim() ||
+            !formData.email.trim() ||
+            !formData.password ||
+            !formData.confirmPassword
+        ) {
+            setError('Please complete all fields.');
+            return;
+        }
+
+        if (formData.password !== formData.confirmPassword) {
+            setError('Passwords do not match.');
+            return;
+        }
+
         try {
             setLoading(true);
 
@@ -61,66 +78,78 @@ function Register() {
     };
 
     return (
-        <div className="register-page">
-            <Card title="Create account">
+        <AuthLayout
+            title="Create Account"
+            subtitle="Join the prediction game"
+        >
 
-                <form
-                    className="register-form"
-                    onSubmit={handleSubmit}
+            <form
+                className="register-form"
+                onSubmit={handleSubmit}
+            >
+
+                <Input
+                    label="Nickname"
+                    name="nickname"
+                    value={formData.nickname}
+                    onChange={handleChange}
+                    required
+                />
+
+                <Input
+                    label="Email"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                />
+
+                <Input
+                    label="Password"
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                />
+
+                <Input
+                    label="Confirm Password"
+                    type="password"
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    required
+                />
+
+                {error && (
+                    <p className="register-error">
+                        {error}
+                    </p>
+                )}
+
+                <Button
+                    type="submit"
+                    fullWidth
+                    disabled={loading}
                 >
+                    {loading
+                        ? 'Creating Account...'
+                        : 'Create Account'}
+                </Button>
 
-                    <Input
-                        label="Nickname"
-                        name="nickname"
-                        value={formData.nickname}
-                        onChange={handleChange}
-                        required
-                    />
+            </form>
 
-                    <Input
-                        label="Email"
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
+            <p className="register-footer">
+                Already have an account?
 
-                    <Input
-                        label="Password"
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
+                <Link to={ROUTES.LOGIN}>
+                    Sign In
+                </Link>
+            </p>
 
-                    <Input
-                        label="Confirm Password"
-                        type="password"
-                        name="confirmPassword"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        required
-                    />
-
-                    {error && (
-                        <p className="register-error">
-                            {error}
-                        </p>
-                    )}
-
-                    <Button
-                        type="submit"
-                        fullWidth
-                    >
-                        Create account
-                    </Button>
-
-                </form>
-
-            </Card>
-        </div>
+        </AuthLayout>
     );
 }
 

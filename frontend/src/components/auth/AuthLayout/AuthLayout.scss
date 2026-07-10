@@ -1,0 +1,32 @@
+@use '../../../styles/abstracts/variables' as *;
+
+.auth-page {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 460px;
+    padding: 2.5rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid rgba(255, 255, 255, .08);
+    backdrop-filter: blur(12px);
+
+    h1 {
+        text-align: center;
+        color: white;
+        margin-bottom: .5rem;
+    }
+
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: rgba(255, 255, 255, .65);
+    margin-bottom: 2rem;
+}

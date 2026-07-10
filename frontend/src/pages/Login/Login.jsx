@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-import Card from '../../components/ui/Card/Card';
 import Input from '../../components/ui/Input/Input';
 import Button from '../../components/ui/Button/Button';
+import AuthLayout from '../../components/auth/AuthLayout/AuthLayout';
 
 import { useAuth } from '../../hooks/useAuth';
 import { ROUTES } from '../../constants/routes';
@@ -56,52 +56,66 @@ function Login() {
             }
 
             navigate(ROUTES.VOTE);
+
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="login-page">
-            <Card title="Welcome back">
-                <form
-                    className="login-form"
-                    onSubmit={handleSubmit}
+        <AuthLayout
+            title="Welcome Back"
+            subtitle="Sign in to continue"
+        >
+
+            <form
+                className="login-form"
+                onSubmit={handleSubmit}
+            >
+
+                <Input
+                    label="Email"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                />
+
+                <Input
+                    label="Password"
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                />
+
+                {error && (
+                    <p className="login-error">
+                        {error}
+                    </p>
+                )}
+
+                <Button
+                    type="submit"
+                    fullWidth
+                    disabled={loading}
                 >
-                    <Input
-                        label="Email"
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
+                    {loading ? 'Signing In...' : 'Sign In'}
+                </Button>
 
-                    <Input
-                        label="Password"
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
+            </form>
 
-                    {error && (
-                        <p className="login-error">
-                            {error}
-                        </p>
-                    )}
+            <p className="login-footer">
+                Don't have an account?
 
-                    <Button
-                        type="submit"
-                        fullWidth
-                        disabled={loading}
-                    >
-                        {loading ? 'Signing in...' : 'Sign In'}
-                    </Button>
-                </form>
-            </Card>
-        </div>
+                <Link to={ROUTES.REGISTER}>
+                    Sign Up
+                </Link>
+            </p>
+
+        </AuthLayout>
     );
 }
 
