@@ -26,9 +26,9 @@ function EpisodeResults({
 
     const handleSelect = (concurent) => {
 
-        if (episode.validated) {
-            return;
-        }
+        // if (episode.validated) {
+        //     return;
+        // }
 
         setSelectedIds((prev) => {
 
@@ -130,10 +130,10 @@ function EpisodeResults({
             <Button
                 type="button"
                 fullWidth
-                // disabled={
-                //     episode.validated ||
-                //     selectedIds.length === 0
-                // }
+                disabled={
+                    episode.validated ||
+                    selectedIds.length === 0
+                }
                 onClick={handleValidate}
             >
                 {episode.validated
