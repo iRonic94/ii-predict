@@ -101,16 +101,16 @@ function Login() {
                     fullWidth
                     disabled={loading}
                 >
-                    {loading ? 'Signing In...' : 'Sign In'}
+                    {loading ? 'Te loghez imediat...' : 'Logheaza-te'}
                 </Button>
 
             </form>
 
             <p className="login-footer">
-                Don't have an account?
+                N-ai incă cont?
 
                 <Link to={ROUTES.REGISTER}>
-                    Sign Up
+                    Dă click/tap aici!
                 </Link>
             </p>
 

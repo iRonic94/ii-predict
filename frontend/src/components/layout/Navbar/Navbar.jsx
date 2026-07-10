@@ -26,7 +26,7 @@ function Navbar() {
                 className="navbar-logo"
                 onClick={() => navigate(ROUTES.VOTE)}
             >
-                II Predict
+                🏝️  Insula Predicției
             </div>
 
             <nav className="navbar-nav">
@@ -39,7 +39,7 @@ function Navbar() {
                             : 'navbar-link'
                     }
                 >
-                    Vote
+                    Votează
                 </NavLink>
 
                 <NavLink
@@ -50,7 +50,7 @@ function Navbar() {
                             : 'navbar-link'
                     }
                 >
-                    Ranking
+                    Clasament
                 </NavLink>
 
                 {profile?.role === 'admin' && (
@@ -78,7 +78,7 @@ function Navbar() {
                     className="logout-btn"
                     onClick={handleLogout}
                 >
-                    Logout
+                    Ieși afar'
                 </button>
 
             </div>

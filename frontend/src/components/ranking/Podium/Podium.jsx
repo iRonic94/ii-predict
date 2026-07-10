@@ -54,7 +54,7 @@ function Podium({ users }) {
                             {getInitial(first.nickname)}
 
                             <div className="podium-rank gold">
-                                1
+                                <FaMedal />
                             </div>
 
                         </div>

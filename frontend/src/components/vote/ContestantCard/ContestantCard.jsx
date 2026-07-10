@@ -41,7 +41,7 @@ function ContestantCard({
                     type="button"
                     className="contestant-button"
                 >
-                    {selected ? 'Selected' : 'Select'}
+                    {selected ? 'Selectat' : 'Selectează'}
                 </button>
 
             </div>

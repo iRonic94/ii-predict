@@ -57,11 +57,11 @@ function EpisodeSelector({
 
                         <span className="episode-status">
 
-                            {status === 'active' && '🟢 Voting'}
+                            {status === 'active' && '🟢 Votează'}
 
-                            {status === 'locked' && '🔒 Locked'}
+                            {status === 'locked' && '🔒 Blocat'}
 
-                            {status === 'closed' && '✔ Closed'}
+                            {status === 'closed' && '✔ Inchis'}
 
                         </span>
 

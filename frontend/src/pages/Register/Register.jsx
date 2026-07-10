@@ -135,17 +135,16 @@ function Register() {
                     disabled={loading}
                 >
                     {loading
-                        ? 'Creating Account...'
-                        : 'Create Account'}
+                        ? 'Se creaza contul...'
+                        : 'Creaza-ți contul'}
                 </Button>
 
             </form>
 
             <p className="register-footer">
-                Already have an account?
-
+                Daca ai cont nu te mai chinui
                 <Link to={ROUTES.LOGIN}>
-                    Sign In
+                    Dăi sign up aici!
                 </Link>
             </p>
 

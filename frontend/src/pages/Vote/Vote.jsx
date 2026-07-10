@@ -146,7 +146,7 @@ function Vote() {
             <div className="vote-page">
 
                 <p className="vote-info">
-                    Selected {selectedIds.length} / 3 contestants
+                    {selectedIds.length} / 3 concurenți selectați
                 </p>
 
                 {message && (
@@ -183,7 +183,7 @@ function Vote() {
                     }
                     onClick={handleSubmitVotes}
                 >
-                    Submit Votes
+                    Votează!
                 </Button>
 
             </div>

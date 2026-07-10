@@ -15,17 +15,12 @@
 
 .input {
     width: 100%;
-
     padding: .9rem 1rem;
-
     background: $surface;
     color: $text;
-
     border: 1px solid $border;
     border-radius: $radius;
-
     outline: none;
-
     transition: $transition;
 
     &::placeholder {
