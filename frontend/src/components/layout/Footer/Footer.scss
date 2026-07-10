@@ -1,0 +1,9 @@
+@use '../../../styles/abstracts/variables' as *;
+
+.footer {
+    padding: 1.5rem;
+    text-align: center;
+    border-top: 1px solid $border;
+    color: $text-secondary;
+
+}

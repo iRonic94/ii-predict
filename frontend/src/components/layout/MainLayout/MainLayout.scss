@@ -1,0 +1,15 @@
+@use '../../../styles/abstracts/variables' as *;
+
+.layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: $background;
+}
+
+.layout-content {
+    flex: 1;
+    width: min(1400px, 92%);
+    margin: 0 auto;
+    padding: 3rem 0;
+}
