@@ -136,9 +136,9 @@ function EpisodeResults({
                 }
                 onClick={handleValidate}
             >
-                {episode.validated
+                {/* {episode.validated
                     ? 'Already Validated'
-                    : 'Validate Episode'}
+                    : 'Validate Episode'} */}
             </Button>
 
         </section>

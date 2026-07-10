@@ -19,6 +19,10 @@ export async function upsertProfile(user) {
         id: user.id,
         email: user.email,
         nickname,
+        avatar_url:
+            user.user_metadata.avatar_url ??
+            user.user_metadata.picture ??
+            null,
         total_points: 0,
     };
 

@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-
+import avatarPlaceholder from '../../../assets/ph_avatar.png';
 import './Navbar.scss';
 import logo from '../../../assets/iconIIpredict.png'
 
@@ -79,18 +79,20 @@ function Navbar() {
             </nav>
 
             <div className="navbar-user">
-
-                <span className="navbar-name">
-                    👤 {profile?.nickname}
+                <img
+                    src={profile?.avatar_url || avatarPlaceholder}
+                    alt={profile?.nickname}
+                    className="navbar-avatar"
+                />
+                <span>
+                    {profile?.nickname}
                 </span>
-
                 <button
                     className="logout-btn"
                     onClick={handleLogout}
                 >
                     Ieși afar'
                 </button>
-
             </div>
 
         </header>

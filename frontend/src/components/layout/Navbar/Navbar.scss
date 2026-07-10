@@ -56,7 +56,24 @@
 .navbar-user {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: .75rem;
+    cursor: pointer;
+}
+
+.navbar-avatar {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.navbar-user span {
+    font-size: .95rem;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
 }
 
 .navbar-name {
@@ -77,4 +94,18 @@
 .logout-btn:hover {
     border-color: $primary;
     color: $primary;
+}
+
+
+@media(max-width:768px) {
+
+    .navbar-avatar {
+        width: 36px;
+        height: 36px;
+    }
+
+    .navbar-user span {
+        display: none;
+    }
+
 }
