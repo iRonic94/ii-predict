@@ -130,15 +130,15 @@ function EpisodeResults({
             <Button
                 type="button"
                 fullWidth
-                disabled={
-                    episode.validated ||
-                    selectedIds.length === 0
-                }
+                // disabled={
+                //     episode.validated ||
+                //     selectedIds.length === 0
+                // }
                 onClick={handleValidate}
             >
-                {/* {episode.validated
+                {episode.validated
                     ? 'Already Validated'
-                    : 'Validate Episode'} */}
+                    : 'Validate Episode'}
             </Button>
 
         </section>
