@@ -37,7 +37,7 @@ function Vote() {
             }
 
             if (prev.length >= 3) {
-                setMessage('You can only select 3 contestants.');
+                setMessage('Poti selecta doar 3 concurenti!');
                 return prev;
             }
 

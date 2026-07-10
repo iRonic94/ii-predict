@@ -5,7 +5,6 @@ function ContestantCard({
     selected = false,
     onSelect,
 }) {
-
     return (
         <article
             className={`contestant-card ${selected ? 'selected' : ''}`}
@@ -17,10 +16,18 @@ function ContestantCard({
                 <img
                     src={
                         concurent.image_url ||
-                        'https://placehold.co/400x500?text=No+Image'
+                        'https://placehold.co/500x700?text=No+Image'
                     }
                     alt={concurent.name}
                 />
+
+                {selected && (
+                    <div className="selected-overlay">
+                        <div className="selected-circle">
+                            ✓
+                        </div>
+                    </div>
+                )}
 
             </div>
 
@@ -32,7 +39,7 @@ function ContestantCard({
 
                 <button
                     type="button"
-                    className="contestant-card-button"
+                    className="contestant-button"
                 >
                     {selected ? 'Selected' : 'Select'}
                 </button>
