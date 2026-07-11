@@ -146,7 +146,7 @@ function Vote() {
             <div className="vote-page">
 
                 <p className="vote-info">
-                    {selectedIds.length} / 3 concurenți selectați
+                    Maxim 3 concurenți pot fi selectați, pana acum ai:{selectedIds.length} / 3 concurenți selectați
                 </p>
 
                 {message && (
@@ -178,7 +178,7 @@ function Vote() {
                     type="button"
                     fullWidth
                     disabled={
-                        selectedIds.length !== 3 ||
+                        selectedIds.length == 0 ||
                         !selectedEpisode
                     }
                     onClick={handleSubmitVotes}

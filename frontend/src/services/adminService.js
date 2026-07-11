@@ -13,16 +13,23 @@ export async function clearEpisodeResults(episodeId) {
         .eq('episode_id', episodeId);
 }
 
-export async function validateEpisode(episodeId) {
+export async function validateEpisode(
+    episodeId,
+    validated
+) {
     return await supabase
         .from('episoade')
         .update({
-            validated: true,
+            validated,
         })
         .eq('id', episodeId);
 }
+
 export async function calculateEpisodePoints(episodeId) {
-    return await supabase.rpc('calculate_episode_points', {
-        p_episode_id: episodeId,
-    });
+    return await supabase.rpc(
+        'calculate_episode_points',
+        {
+            p_episode_id: episodeId,
+        }
+    );
 }

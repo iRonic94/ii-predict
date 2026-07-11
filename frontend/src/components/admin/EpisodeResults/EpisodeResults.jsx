@@ -19,16 +19,18 @@ function EpisodeResults({
 }) {
 
     const [selectedIds, setSelectedIds] = useState([]);
+    const [validateEpisodeSwitch, setValidateEpisodeSwitch] = useState(false);
 
     useEffect(() => {
+
         setSelectedIds([]);
+        setValidateEpisodeSwitch(
+            episode?.validated ?? false
+        );
+
     }, [episode]);
 
     const handleSelect = (concurent) => {
-
-        // if (episode.validated) {
-        //     return;
-        // }
 
         setSelectedIds((prev) => {
 
@@ -48,15 +50,11 @@ function EpisodeResults({
             return;
         }
 
-        if (episode.validated) {
-            alert('Episode already validated.');
-            return;
-        }
-
-        const { error: deleteError } =
-            await clearEpisodeResults(
-                episode.id
-            );
+        const {
+            error: deleteError,
+        } = await clearEpisodeResults(
+            episode.id
+        );
 
         if (deleteError) {
             console.error(deleteError);
@@ -68,28 +66,32 @@ function EpisodeResults({
             concurent_id: concurentId,
         }));
 
-        const { error: insertError } =
-            await saveEpisodeResults(results);
+        const {
+            error: insertError,
+        } = await saveEpisodeResults(results);
 
         if (insertError) {
             console.error(insertError);
             return;
         }
 
-        const { error: validateError } =
-            await validateEpisode(
-                episode.id
-            );
+        const {
+            error: validateError,
+        } = await validateEpisode(
+            episode.id,
+            validateEpisodeSwitch
+        );
 
         if (validateError) {
             console.error(validateError);
             return;
         }
 
-        const { error: pointsError } =
-            await calculateEpisodePoints(
-                episode.id
-            );
+        const {
+            error: pointsError,
+        } = await calculateEpisodePoints(
+            episode.id
+        );
 
         if (pointsError) {
             console.error(pointsError);
@@ -98,7 +100,11 @@ function EpisodeResults({
 
         onValidated();
 
-        alert('Episode validated successfully.');
+        alert(
+            validateEpisodeSwitch
+                ? 'Episode validated successfully.'
+                : 'Results saved successfully.'
+        );
 
     };
 
@@ -127,18 +133,39 @@ function EpisodeResults({
 
             </div>
 
+            <div className="validate-switch">
+
+                <label className="switch">
+
+                    <input
+                        type="checkbox"
+                        checked={validateEpisodeSwitch}
+                        onChange={(e) =>
+                            setValidateEpisodeSwitch(
+                                e.target.checked
+                            )
+                        }
+                    />
+
+                    <span className="slider"></span>
+
+                </label>
+
+                <span className="switch-label">
+                    Validate episode
+                </span>
+
+            </div>
+
             <Button
                 type="button"
                 fullWidth
-                disabled={
-                    episode.validated ||
-                    selectedIds.length === 0
-                }
+                disabled={selectedIds.length === 0}
                 onClick={handleValidate}
             >
-                {episode.validated
-                    ? 'Already Validated'
-                    : 'Validate Episode'}
+                {validateEpisodeSwitch
+                    ? 'Validate Episode'
+                    : 'Save Results'}
             </Button>
 
         </section>
