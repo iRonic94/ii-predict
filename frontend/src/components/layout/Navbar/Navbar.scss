@@ -54,10 +54,29 @@
 }
 
 .navbar-user {
+    position: relative;
+}
+
+.navbar-user-trigger {
     display: flex;
     align-items: center;
-    gap: .75rem;
+    gap: .6rem;
+    padding: .35rem .65rem;
+    background: transparent;
+    border: none;
     cursor: pointer;
+    border-radius: 999px;
+    transition: .2s;
+}
+
+.navbar-user-trigger img {
+    display: block;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    object-fit: cover;
+    border-radius: 50%;
+
 }
 
 .navbar-avatar {
@@ -65,15 +84,10 @@
     height: 42px;
     object-fit: cover;
     border-radius: 50%;
-    flex-shrink: 0;
-    transition: transform .25s ease, box-shadow .25s ease;
 }
 
-.navbar-user span {
-    font-size: .95rem;
-    font-weight: 600;
-    color: #fff;
-    white-space: nowrap;
+.navbar-user-trigger:hover {
+    background: rgba(255, 255, 255, .06);
 }
 
 .navbar-name {
@@ -81,19 +95,69 @@
     font-weight: 600;
 }
 
-.logout-btn {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, .15);
-    color: white;
-    padding: .6rem 1rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: .25s;
+.navbar-chevron {
+    color: rgba(255, 255, 255, .75);
+    transition: transform .2s ease;
 }
 
-.logout-btn:hover {
-    border-color: $primary;
-    color: $primary;
+.navbar-chevron.open {
+    transform: rotate(180deg);
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: calc(100% + .8rem);
+    right: 0;
+    width: 220px;
+    padding: .5rem;
+    border-radius: 14px;
+    background: rgba(22, 22, 22, .96);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, .08);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .35);
+    animation: dropdown .18s ease;
+    z-index: 9999;
+
+}
+
+.dropdown-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .9rem 1rem;
+    background: transparent;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .2s;
+    font-size: .95rem;
+
+}
+
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, .06);
+}
+
+.dropdown-item.logout {
+    color: #ef4444;
+}
+
+.dropdown-item.logout:hover {
+    background: rgba(239, 68, 68, .12);
+}
+
+@keyframes dropdown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
