@@ -16,7 +16,10 @@ function EpisodeSelector({
         const opensAt = new Date(episode.opens_at);
         const closesAt = new Date(episode.closes_at);
 
-
+        const isEpisodeOpen =
+            selectedEpisode &&
+            new Date() >= new Date(selectedEpisode.opens_at) &&
+            new Date() <= new Date(selectedEpisode.closes_at);
         if (now < opensAt) {
             return 'locked';
         }

@@ -33,7 +33,10 @@ function Vote() {
     const [selectedIds, setSelectedIds] = useState([]);
 
     const [message, setMessage] = useState('');
-
+    const isEpisodeOpen =
+        selectedEpisode &&
+        new Date() >= new Date(selectedEpisode.opens_at) &&
+        new Date() <= new Date(selectedEpisode.closes_at);
     useEffect(() => {
 
         loadEpisodes();
@@ -83,6 +86,10 @@ function Vote() {
 
     const handleSelect = (concurent) => {
 
+        if (!isEpisodeOpen) {
+            return;
+        }
+
         setSelectedIds((prev) => {
 
             if (prev.includes(concurent.id)) {
@@ -97,7 +104,9 @@ function Vote() {
 
             if (prev.length >= 3) {
 
-                toast.error('Poți selecta maxim 3 concurenți.');
+                toast.error(
+                    'Poți selecta maxim 3 concurenți.'
+                );
 
                 return prev;
 
@@ -194,6 +203,8 @@ function Vote() {
 
     };
 
+
+
     if (loading || !profile) {
 
         return (
@@ -269,6 +280,7 @@ function Vote() {
                                 key={concurent.id}
                                 concurent={concurent}
                                 selected={selectedIds.includes(concurent.id)}
+                                disabled={!isEpisodeOpen}
                                 onSelect={handleSelect}
                             />
 

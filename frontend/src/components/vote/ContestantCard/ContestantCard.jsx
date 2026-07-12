@@ -4,10 +4,13 @@ function ContestantCard({
     concurent,
     selected = false,
     onSelect,
+    disabled,
 }) {
     return (
         <article
-            className={`contestant-card ${selected ? 'selected' : ''}`}
+            className={`contestant-card ${selected ? 'selected' : ''
+                } ${disabled ? 'disabled' : ''
+                }`}
             onClick={() => onSelect(concurent)}
         >
 
