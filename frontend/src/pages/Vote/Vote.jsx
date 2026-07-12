@@ -96,7 +96,7 @@ function Vote() {
 
             if (prev.length >= 3) {
 
-                toast.error('Poți selecta maximum 3 concurenți.');
+                toast.error('Poți selecta maxim 3 concurenți.');
 
                 return prev;
 
