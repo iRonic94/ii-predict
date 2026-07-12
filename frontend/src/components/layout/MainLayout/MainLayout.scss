@@ -1,33 +1,15 @@
+@use '../../../styles/abstracts/variables' as *;
+
+.layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: $background;
+}
+
 .layout-content {
     flex: 1;
     width: min(1400px, 92%);
     margin: 0 auto;
     padding: 3rem 0;
-}
-
-@media (max-width: 992px) {
-
-    .layout-content {
-        width: min(100%, 94%);
-        padding: 2rem 0;
-    }
-
-}
-
-@media (max-width: 768px) {
-
-    .layout-content {
-        width: calc(100% - 2rem);
-        padding: 1.5rem 0;
-    }
-
-}
-
-@media (max-width: 480px) {
-
-    .layout-content {
-        width: calc(100% - 1.25rem);
-        padding: 1rem 0;
-    }
-
 }
