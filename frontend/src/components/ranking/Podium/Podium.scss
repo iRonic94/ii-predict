@@ -17,6 +17,11 @@
     h3 {
         color: white;
         margin-top: 1rem;
+        max-width: 140px;
+        text-align: center;
+        line-height: 1.2;
+        word-break: break-word;
+        overflow-wrap: anywhere;
     }
 
     span {
@@ -118,4 +123,134 @@
 
 .podium-base.bronze {
     background: linear-gradient(180deg, #c97a3e, #8b4c26);
+}
+
+
+//tableta
+
+@media (max-width: 992px) {
+
+    .podium {
+        gap: 1rem;
+    }
+
+    .podium-base {
+        width: 130px;
+        font-size: 3rem;
+    }
+
+    .first .podium-base {
+        height: 180px;
+    }
+
+    .second .podium-base {
+        height: 145px;
+    }
+
+    .third .podium-base {
+        height: 120px;
+    }
+
+}
+
+//mobil
+
+@media (max-width: 768px) {
+
+    .podium {
+        gap: .6rem;
+        margin: 2rem 0 3rem;
+    }
+
+    .podium-avatar {
+        width: 65px;
+        height: 65px;
+        font-size: 1.5rem;
+    }
+
+    .first .podium-avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 1.8rem;
+    }
+
+    .podium-rank {
+        width: 26px;
+        height: 26px;
+        font-size: .75rem;
+    }
+
+    .first .podium-rank {
+        width: 32px;
+        height: 32px;
+        font-size: .85rem;
+    }
+
+    .podium-crown {
+        font-size: 1.4rem;
+        margin-bottom: .6rem;
+    }
+
+    .podium-item h2,
+    .podium-item h3 {
+        max-width: 90px;
+        font-size: .95rem;
+    }
+
+    .podium-item span {
+        font-size: .8rem;
+    }
+
+    .podium-base {
+        width: 95px;
+        font-size: 2.2rem;
+    }
+
+    .first .podium-base {
+        height: 140px;
+    }
+
+    .second .podium-base {
+        height: 110px;
+    }
+
+    .third .podium-base {
+        height: 90px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .podium {
+        gap: .4rem;
+    }
+
+    .podium-avatar {
+        width: 55px;
+        height: 55px;
+    }
+
+    .first .podium-avatar {
+        width: 70px;
+        height: 70px;
+    }
+
+    .podium-base {
+        width: 80px;
+        font-size: 1.8rem;
+    }
+
+    .first .podium-base {
+        height: 120px;
+    }
+
+    .second .podium-base {
+        height: 95px;
+    }
+
+    .third .podium-base {
+        height: 80px;
+    }
+
 }

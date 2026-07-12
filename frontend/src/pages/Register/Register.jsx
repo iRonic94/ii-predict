@@ -54,6 +54,11 @@ function Register() {
             return;
         }
 
+        if (formData.nickname.trim().length > 15) {
+            setError('Nickname-ul poate avea maximum 15 caractere.');
+            return;
+        }
+
         try {
             setLoading(true);
 
@@ -93,6 +98,7 @@ function Register() {
                     name="nickname"
                     value={formData.nickname}
                     onChange={handleChange}
+                    maxLength={15}
                     required
                 />
 
