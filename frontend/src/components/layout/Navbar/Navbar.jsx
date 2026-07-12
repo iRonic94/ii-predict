@@ -133,10 +133,10 @@ function Navbar() {
                 </button>
                 {open && (
                     <div className="profile-dropdown">
-                        <button className="dropdown-item">
+                        {/* <button className="dropdown-item">
                             <Image size={18} />
                             Schimbă poza
-                        </button>
+                        </button> */}
                         <button
                             className="dropdown-item logout"
                             onClick={handleLogout}>
