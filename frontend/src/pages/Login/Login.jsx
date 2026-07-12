@@ -84,14 +84,11 @@ function Login() {
 
     return (
 
-        <AuthLayout
-            title="Login👹👇"
-        >
+        <AuthLayout title="Logare👹👇">
             <form
                 className="login-form"
                 onSubmit={handleSubmit}
             >
-
                 <Input
                     label="Email"
                     type="email"
@@ -102,7 +99,7 @@ function Login() {
                 />
 
                 <Input
-                    label="Password"
+                    label="Parolă"
                     type="password"
                     name="password"
                     value={formData.password}
@@ -121,7 +118,7 @@ function Login() {
                     fullWidth
                     disabled={loading}
                 >
-                    {loading ? 'Te loghez imediat...' : 'Logheaza-te'}
+                    {loading ? 'Te loghez imediat...' : 'Loghează-te'}
                 </Button>
 
             </form>
@@ -139,9 +136,7 @@ function Login() {
                     src="https://www.svgrepo.com/show/475656/google-color.svg"
                     alt="Google"
                 />
-
                 Continuă cu Google
-
             </button>
 
             <p className="login-footer">

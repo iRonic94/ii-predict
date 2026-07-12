@@ -112,7 +112,7 @@ function Register() {
                 />
 
                 <Input
-                    label="Password"
+                    label="Parolă"
                     type="password"
                     name="password"
                     value={formData.password}
@@ -121,7 +121,7 @@ function Register() {
                 />
 
                 <Input
-                    label="Confirm Password"
+                    label="Confirmare parolă"
                     type="password"
                     name="confirmPassword"
                     value={formData.confirmPassword}
