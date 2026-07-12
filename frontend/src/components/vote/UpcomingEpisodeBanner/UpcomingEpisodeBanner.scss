@@ -1,0 +1,72 @@
+@use '../../../styles/abstracts/variables' as *;
+
+.upcoming-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    padding: .9rem 1.25rem;
+    border-radius: 14px;
+    text-align: center;
+}
+
+.upcoming-title {
+    font-size: .72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    color: rgba(255, 255, 255, .72);
+    margin-bottom: .45rem;
+}
+
+.upcoming-timer {
+    font-size: clamp(1rem, 2vw, 0.6rem);
+    font-weight: 800;
+    line-height: 1;
+    color: white;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .04em;
+}
+
+.upcoming-subtitle {
+    margin-top: .45rem;
+    font-size: .78rem;
+    color: rgba(255, 255, 255, .55);
+}
+
+@media (max-width:768px) {
+
+    .upcoming-banner {
+        padding: .8rem 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .upcoming-title {
+        font-size: .68rem;
+    }
+
+    .upcoming-timer {
+        font-size: 1.75rem;
+    }
+
+    .upcoming-subtitle {
+        font-size: .72rem;
+    }
+
+}
+
+//mobile
+
+@media (max-width: 480px) {
+
+    .upcoming-banner {
+        border-radius: 16px;
+        padding: 1rem;
+    }
+
+    .upcoming-timer {
+        font-size: 1rem;
+    }
+
+}

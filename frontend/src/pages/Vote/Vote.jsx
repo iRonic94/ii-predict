@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import MainLayout from '../../components/layout/MainLayout/MainLayout';
 import ContestantCard from '../../components/vote/ContestantCard/ContestantCard';
 import EpisodeSelector from '../../components/vote/EpisodeSelector/EpisodeSelector';
+import UpcomingEpisodeBanner from '../../components/vote/UpcomingEpisodeBanner/UpcomingEpisodeBanner';
 import Button from '../../components/ui/Button/Button';
 
 import { useAuth } from '../../hooks/useAuth';
@@ -230,7 +231,9 @@ function Vote() {
     return (
 
         <MainLayout>
-
+            <UpcomingEpisodeBanner
+                episodes={episodes}
+            />
             <EpisodeSelector
                 episodes={episodes}
                 selectedEpisode={selectedEpisode}
