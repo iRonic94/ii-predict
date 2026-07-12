@@ -1,7 +1,11 @@
 import { createContext, useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 
-import { login, register, logout } from '../services/authService';
+import {
+    login,
+    register as authRegister,
+    logout,
+} from '../services/authService';
 
 import {
     getProfile,
@@ -29,7 +33,6 @@ export function AuthProvider({ children }) {
             let { data, error } = await getProfile(user.id);
 
             if (error?.code === 'PGRST116') {
-
                 const {
                     profile,
                     error: upsertError,
@@ -40,10 +43,8 @@ export function AuthProvider({ children }) {
                     setProfile(null);
                     return;
                 }
-
                 setProfile(profile);
                 return;
-
             }
 
             if (error) {
@@ -64,13 +65,16 @@ export function AuthProvider({ children }) {
 
             setSession(session);
             setUser(session?.user ?? null);
-
             if (session?.user) {
+                const {
+                    error: upsertError,
+                } = await upsertProfile(session.user);
+                if (upsertError) {
+                    console.error(upsertError);
+                }
                 await loadProfile(session.user);
             }
-
             setLoading(false);
-
         };
 
         initializeSession();
@@ -86,16 +90,22 @@ export function AuthProvider({ children }) {
                 switch (event) {
 
                     case 'SIGNED_IN':
-                        await loadProfile(session?.user);
+                        if (session?.user) {
+                            const {
+                                error: upsertError,
+                            } = await upsertProfile(session.user);
+                            if (upsertError) {
+                                console.error(upsertError);
+                            }
+                            await loadProfile(session.user);
+                        }
                         break;
-
                     case 'SIGNED_OUT':
                         setProfile(null);
                         break;
 
                     default:
                         break;
-
                 }
 
                 setLoading(false);
@@ -106,6 +116,35 @@ export function AuthProvider({ children }) {
         return () => subscription.unsubscribe();
 
     }, []);
+
+    const register = async (userData) => {
+
+        const result = await authRegister(userData);
+
+        if (result.error || !result.data?.user) {
+            return result;
+        }
+
+        const {
+            error: profileError,
+        } = await upsertProfile({
+            id: result.data.user.id,
+            email: result.data.user.email,
+            user_metadata: {
+                nickname: userData.nickname,
+            },
+        });
+
+        if (profileError) {
+            return {
+                ...result,
+                error: profileError,
+            };
+        }
+
+        return result;
+
+    };
 
     const value = {
         user,

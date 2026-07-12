@@ -9,12 +9,20 @@ import { useAuth } from '../../hooks/useAuth';
 
 import { getConcurentiActivi } from '../../services/concurentiService';
 import { getAllEpisodes } from '../../services/episodeService';
-import { hasUserVoted, submitVotes } from '../../services/voteService';
+import {
+    hasUserVoted,
+    submitVotes,
+} from '../../services/voteService';
 
 import './Vote.scss';
 
 function Vote() {
-    const { user } = useAuth();
+
+    const {
+        user,
+        profile,
+        loading,
+    } = useAuth();
 
     const [episodes, setEpisodes] = useState([]);
     const [selectedEpisode, setSelectedEpisode] = useState(null);
@@ -59,7 +67,8 @@ function Vote() {
 
     const loadConcurenti = async () => {
 
-        const { data, error } = await getConcurentiActivi();
+        const { data, error } =
+            await getConcurentiActivi();
 
         if (error) {
             console.error(error);
@@ -75,19 +84,31 @@ function Vote() {
         setSelectedIds((prev) => {
 
             if (prev.includes(concurent.id)) {
+
                 setMessage('');
 
-                return prev.filter((id) => id !== concurent.id);
+                return prev.filter(
+                    (id) => id !== concurent.id
+                );
+
             }
 
             if (prev.length >= 3) {
-                setMessage('Poți selecta doar 3 concurenți.');
+
+                setMessage(
+                    'Poți selecta doar 3 concurenți.'
+                );
+
                 return prev;
+
             }
 
             setMessage('');
 
-            return [...prev, concurent.id];
+            return [
+                ...prev,
+                concurent.id,
+            ];
 
         });
 
@@ -95,46 +116,119 @@ function Vote() {
 
     const handleSubmitVotes = async () => {
 
-        if (!selectedEpisode) {
-            setMessage('Nu există un episod activ.');
+        if (!profile) {
+
+            setMessage(
+                'Your profile is still being created.'
+            );
+
             return;
+
         }
 
-        const { data, error } = await hasUserVoted(
+        if (!selectedEpisode) {
+
+            setMessage(
+                'Nu există un episod activ.'
+            );
+
+            return;
+
+        }
+
+        const {
+            data,
+            error,
+        } = await hasUserVoted(
             user.id,
             selectedEpisode.id
         );
 
         if (error) {
+
             console.error(error);
+
             return;
+
         }
 
         if (data.length > 0) {
-            setMessage('Ai votat deja pentru acest episod.');
+
+            setMessage(
+                'Ai votat deja pentru acest episod.'
+            );
+
             return;
+
         }
 
-        const votes = selectedIds.map((concurentId) => ({
-            user_id: user.id,
-            episode_id: selectedEpisode.id,
-            concurent_id: concurentId,
-        }));
+        const votes = selectedIds.map(
+            (concurentId) => ({
+                user_id: user.id,
+                episode_id: selectedEpisode.id,
+                concurent_id: concurentId,
+            })
+        );
 
-        const { error: insertError } = await submitVotes(votes);
+        const {
+            error: insertError,
+        } = await submitVotes(votes);
 
         if (insertError) {
+
             console.error(insertError);
-            setMessage(insertError.message);
+
+            setMessage(
+                insertError.message
+            );
+
             return;
+
         }
 
         setSelectedIds([]);
-        setMessage('Voturile au fost înregistrate cu succes!');
+
+        setMessage(
+            'Voturile au fost înregistrate cu succes!'
+        );
 
     };
 
+    if (loading || !profile) {
+
+        return (
+
+            <MainLayout>
+
+                <section className="vote-loading">
+                    <div className="loading-logo">
+                        <img
+                            src="/assets/iconIIpredict.png"
+                            alt=""
+                            aria-hidden="true"
+                        />
+                        <img
+                            src="/assets/iconIIpredict.png"
+                            alt="Loading"
+                        />
+                    </div>
+
+                    <h2>
+                        Preparing your account...
+                    </h2>
+                    <p>
+                        Please wait while we finish
+                        creating your profile.
+                    </p>
+                </section>
+            </MainLayout>
+
+        );
+
+    }
+
     return (
+
         <MainLayout>
 
             <EpisodeSelector
@@ -146,7 +240,8 @@ function Vote() {
             <div className="vote-page">
 
                 <p className="vote-info">
-                    Maxim 3 concurenți pot fi selectați, pana acum ai:{selectedIds.length} / 3 concurenți selectați
+                    Maxim 3 concurenți pot fi selectați (
+                    {selectedIds.length} / 3)
                 </p>
 
                 {message && (
@@ -156,29 +251,35 @@ function Vote() {
                 )}
 
                 {concurenti.length === 0 ? (
+
                     <p className="empty-state">
                         Nu există concurenți activi.
                     </p>
+
                 ) : (
+
                     <div className="contestants-grid">
 
                         {concurenti.map((concurent) => (
+
                             <ContestantCard
                                 key={concurent.id}
                                 concurent={concurent}
                                 selected={selectedIds.includes(concurent.id)}
                                 onSelect={handleSelect}
                             />
+
                         ))}
 
                     </div>
+
                 )}
 
                 <Button
                     type="button"
                     fullWidth
                     disabled={
-                        selectedIds.length == 0 ||
+                        selectedIds.length === 0 ||
                         !selectedEpisode
                     }
                     onClick={handleSubmitVotes}
@@ -189,7 +290,9 @@ function Vote() {
             </div>
 
         </MainLayout>
+
     );
+
 }
 
 export default Vote;
