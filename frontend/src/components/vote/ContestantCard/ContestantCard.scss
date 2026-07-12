@@ -115,30 +115,39 @@
 
 @media (max-width: 768px) {
 
+    .contestants-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: .8rem;
+    }
+
     .contestant-card-content {
-        padding: 1rem;
-        gap: .6rem;
+        padding: .75rem;
+        gap: .4rem;
     }
 
     .contestant-card-content h3 {
-        font-size: 1.05rem;
+        font-size: .9rem;
+        line-height: 1.2;
     }
 
     .contestant-gender {
-        font-size: .85rem;
+        font-size: .75rem;
     }
 
     .contestant-button {
-        padding: .8rem;
-        font-size: .9rem;
+        padding: .6rem;
+        font-size: .85rem;
     }
 
     .selected-circle {
-        width: 62px;
-        height: 62px;
-        font-size: 2rem;
+        width: 46px;
+        height: 46px;
+        font-size: 1.4rem;
     }
 
+    .contestant-card-image {
+        aspect-ratio: 3 / 3.6;
+    }
 }
 
 @media (max-width: 480px) {
