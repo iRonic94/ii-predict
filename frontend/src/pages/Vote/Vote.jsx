@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 import MainLayout from '../../components/layout/MainLayout/MainLayout';
 import ContestantCard from '../../components/vote/ContestantCard/ContestantCard';
@@ -95,9 +96,7 @@ function Vote() {
 
             if (prev.length >= 3) {
 
-                setMessage(
-                    'Poți selecta doar 3 concurenți.'
-                );
+                toast.error('Poți selecta maximum 3 concurenți.');
 
                 return prev;
 
@@ -118,7 +117,7 @@ function Vote() {
 
         if (!profile) {
 
-            setMessage(
+            toast.error(
                 'Your profile is still being created.'
             );
 
@@ -128,7 +127,7 @@ function Vote() {
 
         if (!selectedEpisode) {
 
-            setMessage(
+            toast.error(
                 'Nu există un episod activ.'
             );
 
@@ -154,7 +153,7 @@ function Vote() {
 
         if (data.length > 0) {
 
-            setMessage(
+            toast.error(
                 'Ai votat deja pentru acest episod.'
             );
 
@@ -188,7 +187,7 @@ function Vote() {
 
         setSelectedIds([]);
 
-        setMessage(
+        toast.success(
             'Voturile au fost înregistrate cu succes!'
         );
 
