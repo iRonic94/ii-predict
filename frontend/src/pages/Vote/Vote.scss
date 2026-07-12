@@ -27,3 +27,145 @@
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 2rem;
 }
+
+.vote-loading {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+}
+
+.loading-logo {
+    position: relative;
+    width: 220px;
+    height: 220px;
+}
+
+.loading-logo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.loading-logo img:first-child {
+    filter: grayscale(100%) brightness(.8);
+}
+
+.loading-logo img:last-child {
+    clip-path: inset(100% 0 0 0);
+    animation: logoFill 2.2s ease-in-out infinite;
+}
+
+.vote-loading h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.vote-loading p {
+    color: rgba(255, 255, 255, .65);
+}
+
+@keyframes logoFill {
+
+    0% {
+        clip-path: inset(100% 0 0 0);
+    }
+
+    45% {
+        clip-path: inset(0 0 0 0);
+    }
+
+    70% {
+        clip-path: inset(0 0 0 0);
+    }
+
+    100% {
+        clip-path: inset(100% 0 0 0);
+    }
+
+}
+
+//Tablet
+
+@media (max-width: 992px) {
+
+    .contestants-grid {
+        gap: 1.5rem;
+    }
+
+    .vote-page {
+        gap: 1.75rem;
+    }
+
+}
+
+//Mobile
+
+@media (max-width: 768px) {
+
+    .vote-page {
+        gap: 1.5rem;
+        margin-top: 10px;
+    }
+
+    .contestants-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.25rem;
+    }
+
+    .vote-info {
+        text-align: center;
+        font-size: .95rem;
+    }
+
+    .vote-message {
+        text-align: center;
+    }
+
+    .loading-logo {
+        width: 180px;
+        height: 180px;
+    }
+
+    .vote-loading h2 {
+        font-size: 1.5rem;
+    }
+
+}
+
+//Small mobile
+
+@media (max-width: 480px) {
+
+    .contestants-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vote-page {
+        gap: 1.25rem;
+    }
+
+    .vote-info {
+        font-size: .9rem;
+    }
+
+    .loading-logo {
+        width: 150px;
+        height: 150px;
+    }
+
+    .vote-loading h2 {
+        font-size: 1.25rem;
+    }
+
+    .vote-loading p {
+        font-size: .9rem;
+        width: 90%;
+    }
+
+}

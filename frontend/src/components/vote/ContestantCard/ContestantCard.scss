@@ -112,3 +112,58 @@
 .contestant-button:hover {
     filter: brightness(1.1);
 }
+
+@media (max-width: 768px) {
+
+    .contestant-card-content {
+        padding: 1rem;
+        gap: .6rem;
+    }
+
+    .contestant-card-content h3 {
+        font-size: 1.05rem;
+    }
+
+    .contestant-gender {
+        font-size: .85rem;
+    }
+
+    .contestant-button {
+        padding: .8rem;
+        font-size: .9rem;
+    }
+
+    .selected-circle {
+        width: 62px;
+        height: 62px;
+        font-size: 2rem;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .contestant-card {
+        border-radius: 16px;
+    }
+
+    .contestant-card-content {
+        padding: .9rem;
+    }
+
+    .contestant-card-content h3 {
+        font-size: 1rem;
+    }
+
+    .contestant-button {
+        padding: .75rem;
+        border-radius: 10px;
+    }
+
+    .selected-circle {
+        width: 54px;
+        height: 54px;
+        font-size: 1.7rem;
+    }
+
+}

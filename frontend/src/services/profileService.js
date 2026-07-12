@@ -11,6 +11,7 @@ export async function getProfile(userId) {
 export async function upsertProfile(user) {
 
     const nickname =
+        user.user_metadata?.nickname ||
         user.user_metadata?.full_name ||
         user.user_metadata?.name ||
         user.email.split('@')[0];
@@ -20,8 +21,8 @@ export async function upsertProfile(user) {
         email: user.email,
         nickname,
         avatar_url:
-            user.user_metadata.avatar_url ??
-            user.user_metadata.picture ??
+            user.user_metadata?.avatar_url ??
+            user.user_metadata?.picture ??
             null,
         total_points: 0,
     };
