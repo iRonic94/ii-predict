@@ -7,6 +7,7 @@ import Register from '../pages/Register/Register';
 import Vote from '../pages/Vote/Vote';
 import Ranking from '../pages/Ranking/Ranking';
 import Admin from '../pages/Admin/Admin';
+import Profile from '../pages/Profile/Profile';
 
 import { useAuth } from '../hooks/useAuth';
 
@@ -52,7 +53,14 @@ function AppRoutes() {
                         </ProtectedRoute>
                     }
                 />
-
+                <Route
+                    path="/profile"
+                    element={
+                        <ProtectedRoute>
+                            <Profile />
+                        </ProtectedRoute>
+                    }
+                />
                 <Route
                     path="/admin"
                     element={

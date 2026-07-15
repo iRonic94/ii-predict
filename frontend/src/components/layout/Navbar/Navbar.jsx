@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { ChevronDown, Image, LogOut } from 'lucide-react';
+import { ChevronDown, Image, LogOut, User } from 'lucide-react';
 
 import avatarPlaceholder from '../../../assets/ph_avatar.png';
 import './Navbar.scss';
@@ -52,9 +52,12 @@ function Navbar() {
         navigate(ROUTES.LOGIN);
     };
 
+    const goToProfile = async () => {
+        navigate(ROUTES.PROFILE);
+    };
+
     return (
         <header className="navbar">
-
             <div
                 className="navbar-logo"
                 onClick={() => navigate(ROUTES.VOTE)}
@@ -95,6 +98,8 @@ function Navbar() {
                     Clasament
                 </NavLink>
 
+
+
                 {profile?.role === 'admin' && (
                     <NavLink
                         to={ROUTES.ADMIN}
@@ -133,23 +138,11 @@ function Navbar() {
                 </button>
                 {open && (
                     <div className="profile-dropdown">
-                        {/* <button className="dropdown-item">
-                            <Image size={18} />
-                            Schimbă poza
-                        </button> */}
-                        <button
-                            className="dropdown-item logout"
-                            onClick={handleLogout}>
-                            <LogOut size={18} />
-                            Ieși afar'
-                        </button>
-
+                        <button className="dropdown-item" onClick={goToProfile}><User size={18} />Profil</button>
+                        <button className="dropdown-item logout" onClick={handleLogout}><LogOut size={18} />Ieși afar'</button>
                     </div>
-
                 )}
-
             </div>
-
         </header>
     );
 }

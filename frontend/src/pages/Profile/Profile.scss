@@ -1,0 +1,188 @@
+.profile-page {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.profile-card {
+        display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: min(520px, 100%);
+    padding: 2.5rem;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid rgba(255, 255, 255, .08);
+
+}
+
+.profile-card h1 {
+    text-align: center;
+}
+
+.profile-avatar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.profile-avatar:hover {
+    transform: scale(1.05);
+}
+
+.change-avatar-text {
+    color: rgba(255, 255, 255, .6);
+    font-size: .85rem;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.profile-form label {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    color: white;
+}
+
+.profile-form input {
+    background: #181818;
+    border: 1px solid rgba(255, 255, 255, .08);
+    color: white;
+    padding: 1rem;
+    border-radius: 12px;
+    font-size: 1rem;
+}
+
+.profile-form input:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+}
+
+.profile-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.profile-stats div {
+    padding: 1rem;
+    text-align: center;
+}
+
+.profile-stats span {
+    display: block;
+    color: rgba(255, 255, 255, .6);
+    font-size: .8rem;
+}
+
+.profile-stats strong {
+    display: block;
+    margin-top: .5rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.rank.gold {
+    color: #f7d24a;
+    background: none;
+}
+
+.rank.silver {
+    color: #d7dce3;
+    background: none;
+}
+
+.rank.bronze {
+    color: #cf8347;
+    background: none;
+}
+
+.rank.default {
+    color: #fff;
+    background: none;
+}
+
+.delete-account-btn {
+    background: #dc2626 !important;
+}
+
+.delete-account-btn:hover {
+    background: #b91c1c !important;
+}
+
+@media(max-width:768px) {
+
+    .profile-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-stats {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+.rank.gold {
+    color: #f7d24a;
+}
+
+.rank.silver {
+    color: #d7dce3;
+}
+
+.rank.bronze {
+    color: #cf8347;
+}
+
+.rank.default {
+    color: white;
+}
+
+@media (max-width: 480px) {
+
+    .profile-page {
+        padding: 1rem 0;
+    }
+
+    .profile-card {
+        padding: 1.5rem 1rem;
+        border-radius: 18px;
+    }
+
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-form input {
+        padding: .85rem;
+        font-size: .95rem;
+    }
+
+    .profile-stats strong {
+        font-size: 1rem;
+    }
+
+    .change-avatar-text {
+        font-size: .75rem;
+    }
+}

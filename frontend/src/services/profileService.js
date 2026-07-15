@@ -53,3 +53,18 @@ export async function getRanking() {
             ascending: false,
         });
 }
+
+export async function getUserRank() {
+    return await supabase.rpc('get_user_rank');
+}
+
+export async function updateProfile(userId, updates) {
+
+    return await supabase
+        .from('profiles')
+        .update(updates)
+        .eq('id', userId)
+        .select()
+        .single();
+
+}

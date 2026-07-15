@@ -148,6 +148,15 @@ export function AuthProvider({ children }) {
         return result;
 
     };
+    const refreshProfile = async () => {
+
+        if (!user) return;
+
+        const { data } = await getProfile(user.id);
+
+        setProfile(data);
+
+    };
 
     const value = {
         user,
@@ -157,6 +166,7 @@ export function AuthProvider({ children }) {
         login,
         register,
         logout,
+        refreshProfile,
     };
 
     return (

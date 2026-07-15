@@ -4,4 +4,5 @@ export const ROUTES = {
     VOTE: '/vote',
     RANKING: '/ranking',
     ADMIN: '/admin',
+    PROFILE: '/profile',
 };
