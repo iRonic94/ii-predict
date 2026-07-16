@@ -23,7 +23,8 @@ function Podium({ users }) {
                 {second && (
                     <>
                         <div className="podium-avatar silver">
-                            {getInitial(second.nickname)}
+                            {(!second.avatar_url || imageError[second.id]) &&
+                                getInitial(second.nickname)}
                             {second.avatar_url && !imageError[second.id] && (
                                 <img
                                     src={second.avatar_url}
@@ -64,7 +65,8 @@ function Podium({ users }) {
                         <FaCrown className="podium-crown" />
 
                         <div className="podium-avatar gold">
-                            {getInitial(first.nickname)}
+                            {(!first.avatar_url || imageError[first.id]) &&
+                                getInitial(first.nickname)}
                             {first.avatar_url && !imageError[first.id] && (
                                 <img
                                     src={first.avatar_url}
@@ -103,7 +105,8 @@ function Podium({ users }) {
                 {third && (
                     <>
                         <div className="podium-avatar bronze">
-                            {getInitial(third.nickname)}
+                            {(!third.avatar_url || imageError[third.id]) &&
+                                getInitial(third.nickname)}
                             {third.avatar_url && !imageError[third.id] && (
                                 <img
                                     src={third.avatar_url}
