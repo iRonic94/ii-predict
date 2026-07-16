@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import toast from 'react-hot-toast';
 
 import MainLayout from '../../components/layout/MainLayout/MainLayout';
@@ -10,11 +10,14 @@ import { useAuth } from '../../hooks/useAuth';
 
 import './Profile.scss';
 
-import { getUserRank, updateProfile } from '../../services/profileService';
+import { getUserRank, updateProfile, uploadAvatar, updateAvatar } from '../../services/profileService';
+
+
 
 function Profile() {
+    const fileInputRef = useRef(null);
 
-    const { profile, user, refreshProfile } = useAuth();
+    const { profile, user, refreshProfile, } = useAuth();
 
     const [nickname, setNickname] = useState(
         profile?.nickname || ''
@@ -77,6 +80,62 @@ function Profile() {
         );
 
     };
+    const handleAvatarChange = async (e) => {
+
+        const file = e.target.files[0];
+
+        if (!file) return;
+
+        if (file.size > 5 * 1024 * 1024) {
+
+            toast.error(
+                'Imaginea poate avea maxim 5 MB.'
+            );
+
+            return;
+
+        }
+
+        const {
+            url,
+            error,
+        } = await uploadAvatar(
+            user.id,
+            file
+        );
+
+        if (error) {
+
+            toast.error(error.message);
+
+            return;
+
+        }
+
+        const {
+            error: updateError,
+        } = await updateAvatar(
+            user.id,
+            url
+        );
+
+        if (updateError) {
+
+            toast.error(updateError.message);
+
+            return;
+
+        }
+
+        await refreshProfile();
+
+        toast.success(
+            'Avatar actualizat!'
+        );
+
+        e.target.value = '';
+
+    };
     const rankClass = rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronze' : 'default';
     return (
 
@@ -87,6 +146,13 @@ function Profile() {
                         Profil
                     </h1>
                     <div className="profile-avatar-wrapper">
+                        <input
+                            ref={fileInputRef}
+                            type="file"
+                            hidden
+                            accept="image/png,image/jpeg,image/webp"
+                            onChange={handleAvatarChange}
+                        />
                         <img
                             src={
                                 profile?.avatar_url ||
@@ -94,9 +160,10 @@ function Profile() {
                             }
                             alt={profile?.nickname}
                             className="profile-avatar"
+                            onClick={() => fileInputRef.current.click()}
                         />
                         <span className="change-avatar-text">
-                            Click pentru a schimba poza
+                            Pentru a modifica poza dati click/apsati pe ea.
                         </span>
                     </div>
                     <div className="profile-form">
@@ -130,7 +197,8 @@ function Profile() {
                             </div>
                         </div>
                         <Button fullWidth disabled={
-                            nickname.trim() === profile?.nickname
+                            nickname.trim() === profile?.nickname ||
+                            nickname.trim().length < 3
                         } onClick={handleSave}>
                             Salvează modificările
                         </Button>

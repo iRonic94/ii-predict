@@ -49,14 +49,18 @@
     height: 110px;
     font-size: 2.5rem;
 }
-
+.podium-avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
 .gold {
     background: linear-gradient(135deg, #f7d24a, #d89b00);
 }
 
 .silver {
     background: linear-gradient(135deg, #d7dce3, #aab1ba);
-    color: #1e1e1e;
 }
 
 .bronze {
