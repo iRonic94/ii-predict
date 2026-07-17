@@ -9,6 +9,7 @@ import avatarPlaceholder from '../../assets/ph_avatar.png';
 import { useAuth } from '../../hooks/useAuth';
 
 import './Profile.scss';
+import { Camera } from 'lucide-react';
 
 import { getUserRank, updateProfile, uploadAvatar, updateAvatar } from '../../services/profileService';
 
@@ -162,9 +163,9 @@ function Profile() {
                             className="profile-avatar"
                             onClick={() => fileInputRef.current.click()}
                         />
-                        <span className="change-avatar-text">
-                            Pentru a modifica poza dati click/apsati pe ea.
-                        </span>
+                        <div className="profile-avatar-overlay">
+                            <Camera size={22} />
+                        </div>
                     </div>
                     <div className="profile-form">
                         <label>

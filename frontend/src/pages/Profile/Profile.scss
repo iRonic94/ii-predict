@@ -13,37 +13,65 @@
     border-radius: 24px;
     background: rgba(255, 255, 255, .04);
     border: 1px solid rgba(255, 255, 255, .08);
-
 }
 
 .profile-card h1 {
     text-align: center;
 }
 
+/* ---------- Avatar ---------- */
+
 .profile-avatar-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: transform .25s ease;
 }
 
 .profile-avatar {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: block;
     object-fit: cover;
-    cursor: pointer;
-    transition: .25s;
+    border-radius: 50%;
+   
 }
 
-.profile-avatar:hover {
+.profile-avatar-wrapper:hover {
     transform: scale(1.05);
 }
 
+.profile-avatar-overlay {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 42%;
+    background: rgba(0, 0, 0, .55);
+    backdrop-filter: blur(3px);
+    color: #fff;
+    border-radius: 0 0 999px 999px;
+    border-top: 1px solid rgba(255,255,255,.08);
+    opacity: 0;
+    transition: opacity .25s ease;
+    pointer-events: none;
+}
+.profile-avatar-wrapper:hover .profile-avatar-overlay {
+    opacity: 1;
+}
 .change-avatar-text {
+    margin-top: 1rem;
+    text-align: center;
     color: rgba(255, 255, 255, .6);
     font-size: .85rem;
 }
+
+/* ---------- Form ---------- */
 
 .profile-form {
     display: flex;
@@ -72,6 +100,8 @@
     cursor: not-allowed;
 }
 
+/* ---------- Stats ---------- */
+
 .profile-stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -87,7 +117,7 @@
 
 .profile-stats span {
     display: block;
-    color: rgba(255, 255, 255, .6);
+    color: rgba(255,255,255,.6);
     font-size: .8rem;
 }
 
@@ -97,6 +127,8 @@
     font-size: 1.4rem;
     font-weight: 700;
 }
+
+/* ---------- Rank ---------- */
 
 .rank.gold {
     color: #f7d24a;
@@ -118,6 +150,8 @@
     background: none;
 }
 
+/* ---------- Buttons ---------- */
+
 .delete-account-btn {
     background: #dc2626 !important;
 }
@@ -126,13 +160,15 @@
     background: #b91c1c !important;
 }
 
-@media(max-width:768px) {
+/* ---------- Tablet ---------- */
+
+@media (max-width: 768px) {
 
     .profile-card {
         padding: 2rem 1.5rem;
     }
 
-    .profile-avatar {
+    .profile-avatar-wrapper {
         width: 120px;
         height: 120px;
     }
@@ -140,24 +176,13 @@
     .profile-stats {
         grid-template-columns: 1fr;
     }
-
+    
+    .profile-avatar-overlay {
+        opacity: 1;
+    }
 }
 
-.rank.gold {
-    color: #f7d24a;
-}
-
-.rank.silver {
-    color: #d7dce3;
-}
-
-.rank.bronze {
-    color: #cf8347;
-}
-
-.rank.default {
-    color: white;
-}
+/* ---------- Mobile ---------- */
 
 @media (max-width: 480px) {
 
@@ -170,7 +195,7 @@
         border-radius: 18px;
     }
 
-    .profile-avatar {
+    .profile-avatar-wrapper {
         width: 100px;
         height: 100px;
     }
