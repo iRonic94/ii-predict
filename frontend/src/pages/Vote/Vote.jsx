@@ -242,6 +242,7 @@ function Vote() {
     return (
 
         <MainLayout>
+
             <UpcomingEpisodeBanner
                 episodes={episodes}
             />
@@ -257,7 +258,8 @@ function Vote() {
                     Maxim 3 concurenți pot fi selectați (
                     {selectedIds.length} / 3)
                 </p>
-
+                <h1>Cine credeți că pică in ispită?
+                </h1>
                 {message && (
                     <p className="vote-message">
                         {message}

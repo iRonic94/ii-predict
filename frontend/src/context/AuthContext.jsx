@@ -9,7 +9,7 @@ import {
 
 import {
     getProfile,
-    upsertProfile,
+    updateProfile,
 } from '../services/profileService';
 
 export const AuthContext = createContext(null);
@@ -30,14 +30,32 @@ export function AuthProvider({ children }) {
                 return;
             }
 
-            const {
-                data,
-                error,
-            } = await getProfile(user.id);
+            const { data, error } = await getProfile(user.id);
 
             if (error) {
                 console.error(error);
                 setProfile(null);
+                return;
+            }
+
+            const googleAvatar =
+                user.user_metadata?.avatar_url ??
+                user.user_metadata?.picture;
+
+            if (data && !data.avatar_url && googleAvatar) {
+
+                const { data: updatedProfile, error: updateError } =
+                    await updateProfile(user.id, {
+                        avatar_url: googleAvatar,
+                    });
+
+                if (updateError) {
+                    console.error(updateError);
+                    setProfile(data);
+                    return;
+                }
+
+                setProfile(updatedProfile);
                 return;
             }
 
@@ -55,17 +73,7 @@ export function AuthProvider({ children }) {
             setUser(session?.user ?? null);
 
             if (session?.user) {
-
-                const {
-                    error: upsertError,
-                } = await upsertProfile(session.user);
-
-                if (upsertError) {
-                    console.error(upsertError);
-                }
-
                 await loadProfile(session.user);
-
             }
 
             setLoading(false);
@@ -87,17 +95,7 @@ export function AuthProvider({ children }) {
                     case 'SIGNED_IN':
 
                         if (session?.user) {
-
-                            const {
-                                error: upsertError,
-                            } = await upsertProfile(session.user);
-
-                            if (upsertError) {
-                                console.error(upsertError);
-                            }
-
                             await loadProfile(session.user);
-
                         }
 
                         break;
@@ -122,32 +120,12 @@ export function AuthProvider({ children }) {
 
     const register = async (userData) => {
 
-        const result = await authRegister(userData);
-
-        if (result.error || !result.data?.user) {
-            return result;
-        }
-
-        const {
-            error: profileError,
-        } = await upsertProfile({
-            id: result.data.user.id,
-            email: result.data.user.email,
-            user_metadata: {
-                nickname: userData.nickname,
-            },
-        });
-
-        if (profileError) {
-            return {
-                ...result,
-                error: profileError,
-            };
-        }
-
-        return result;
+        // Triggerul handle_new_user() creează automat profilul.
+        // Aici doar înregistrăm utilizatorul.
+        return await authRegister(userData);
 
     };
+
     const refreshProfile = async () => {
 
         if (!user) return;
