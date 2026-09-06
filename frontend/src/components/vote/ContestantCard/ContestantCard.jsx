@@ -1,3 +1,4 @@
+import { supabase } from '../../../lib/supabase';
 import './ContestantCard.scss';
 
 function ContestantCard({
@@ -6,6 +7,13 @@ function ContestantCard({
     onSelect,
     disabled,
 }) {
+    const imagePath = `${concurent.gender}.webp`;
+
+    const { data } = supabase.storage
+        .from('cupluri')
+        .getPublicUrl(imagePath);
+
+    const imageUrl = data?.publicUrl;
     return (
         <article
             className={`contestant-card ${selected ? 'selected' : ''
@@ -15,12 +23,8 @@ function ContestantCard({
         >
 
             <div className="contestant-card-image">
-
                 <img
-                    src={
-                        concurent.image_url ||
-                        'https://placehold.co/500x700?text=No+Image'
-                    }
+                    src={imageUrl || 'https://placehold.co/500x700?text=No+Image'}
                     alt={concurent.name}
                 />
 
