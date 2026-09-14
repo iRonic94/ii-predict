@@ -5,4 +5,6 @@ export const ROUTES = {
     RANKING: '/ranking',
     ADMIN: '/admin',
     PROFILE: '/profile',
+    FORGOT_PASSWORD: '/forgot-password',
+    RESET_PASSWORD: '/reset-password',
 };

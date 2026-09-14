@@ -5,6 +5,8 @@ import {
     login,
     register as authRegister,
     logout,
+    resetPassword as authResetPassword,
+    updatePassword as authUpdatePassword,
 } from '../services/authService';
 
 import {
@@ -20,6 +22,7 @@ export function AuthProvider({ children }) {
     const [session, setSession] = useState(null);
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isPasswordRecovery, setIsPasswordRecovery] = useState(false);
 
     useEffect(() => {
 
@@ -104,6 +107,9 @@ export function AuthProvider({ children }) {
                         setProfile(null);
                         break;
 
+                    case 'PASSWORD_RECOVERY':
+                        setIsPasswordRecovery(true);
+                        break;
                     default:
                         break;
 
@@ -136,6 +142,8 @@ export function AuthProvider({ children }) {
 
     };
 
+
+
     const value = {
         user,
         session,
@@ -144,6 +152,8 @@ export function AuthProvider({ children }) {
         login,
         register,
         logout,
+        resetPassword: authResetPassword,
+        updatePassword: authUpdatePassword,
         refreshProfile,
     };
 

@@ -8,6 +8,8 @@ import Vote from '../pages/Vote/Vote';
 import Ranking from '../pages/Ranking/Ranking';
 import Admin from '../pages/Admin/Admin';
 import Profile from '../pages/Profile/Profile';
+import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
+import ResetPassword from '../pages/ResetPassword/ResetPassword';
 
 import { useAuth } from '../hooks/useAuth';
 
@@ -19,7 +21,6 @@ function AppRoutes() {
         <BrowserRouter>
 
             <Routes>
-
                 <Route
                     path="/"
                     element={
@@ -29,22 +30,26 @@ function AppRoutes() {
                         />
                     }
                 />
-
                 <Route
                     path="/login"
                     element={<Login />}
                 />
-
                 <Route
                     path="/register"
                     element={<Register />}
                 />
-
+                <Route
+                    path="/forgot-password"
+                    element={<ForgotPassword />}
+                />
+                <Route
+                    path="/reset-password"
+                    element={<ResetPassword />}
+                />
                 <Route
                     path="/ranking"
                     element={<Ranking />}
                 />
-
                 <Route
                     path="/vote"
                     element={
@@ -69,7 +74,6 @@ function AppRoutes() {
                         </ProtectedRoute>
                     }
                 />
-
                 <Route
                     path="*"
                     element={
@@ -79,7 +83,6 @@ function AppRoutes() {
                         />
                     }
                 />
-
             </Routes>
 
         </BrowserRouter>

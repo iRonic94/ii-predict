@@ -84,7 +84,7 @@ function Register() {
 
     return (
         <AuthLayout
-            title="Creaza cont"
+            title="Crează cont"
             subtitle="Sumset is back!"
         >
 
@@ -141,19 +141,17 @@ function Register() {
                     disabled={loading}
                 >
                     {loading
-                        ? 'Se creaza contul...'
-                        : 'Creaza-ți contul'}
+                        ? 'Se crează contul...'
+                        : 'Crează-ți contul'}
                 </Button>
 
             </form>
 
             <p className="register-footer">
-                Daca ai cont nu te mai chinui
                 <Link to={ROUTES.LOGIN}>
-                    Dăi sign up aici!
+                    Revino la pagina de logare.
                 </Link>
             </p>
-
         </AuthLayout>
     );
 }

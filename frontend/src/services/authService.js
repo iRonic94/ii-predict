@@ -31,3 +31,15 @@ export async function signInWithGoogle() {
         },
     });
 }
+
+export async function resetPassword(email) {
+    return await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+    });
+}
+
+export async function updatePassword(password) {
+    return await supabase.auth.updateUser({
+        password,
+    });
+}

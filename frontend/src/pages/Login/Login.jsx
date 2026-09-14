@@ -140,14 +140,15 @@ function Login() {
             </button>
 
             <p className="login-footer">
-                N-ai încă cont?
                 <Link to={ROUTES.REGISTER}>
-                    Dă click/tap aici!
+                    Crează-ți cont nou
                 </Link>
-
+                <Link to={ROUTES.FORGOT_PASSWORD}>
+                    Ai uitat parola?
+                </Link>
             </p>
 
-        </AuthLayout>
+        </AuthLayout >
 
     );
 
