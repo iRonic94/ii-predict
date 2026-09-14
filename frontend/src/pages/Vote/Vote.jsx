@@ -80,8 +80,30 @@ function Vote() {
             return;
         }
 
-        setConcurenti(data);
+        const sortedConcurenti = [...data].sort((a, b) => {
+            if (a.cuplu_number !== b.cuplu_number) {
+                return a.cuplu_number - b.cuplu_number;
+            }
+            if (a.gender === 'F' && b.gender === 'M') {
+                return -1;
+            }
+            if (a.gender === 'M' && b.gender === 'F') {
+                return 1;
+            }
+            return 0;
+        });
+        const girls = sortedConcurenti.filter(
+            concurent => concurent.gender === 'F'
+        );
 
+        const boys = sortedConcurenti.filter(
+            concurent => concurent.gender === 'M'
+        );
+
+        setConcurenti([
+            ...girls,
+            ...boys,
+        ]);
     };
 
     const handleSelect = (concurent) => {
@@ -249,7 +271,7 @@ function Vote() {
                     Maxim 3 concurenți pot fi selectați (
                     {selectedIds.length} / 3)
                 </p>
-                <h1>Cine credeți că v-a aprinde flacăra ispitei?
+                <h1>Cine credeți că va aprinde flacăra ispitei?
                 </h1>
                 {message && (
                     <p className="vote-message">

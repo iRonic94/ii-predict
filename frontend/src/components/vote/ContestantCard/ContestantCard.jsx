@@ -39,11 +39,9 @@ function ContestantCard({
             </div>
 
             <div className="contestant-card-content">
-
                 <h3>
                     {concurent.name}
                 </h3>
-
                 <button
                     type="button"
                     className="contestant-button"

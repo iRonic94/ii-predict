@@ -61,11 +61,8 @@ function EpisodeSelector({
                         </span>
 
                         <span className="episode-status">
-
                             {status === 'active' && '🟢 Votează'}
-
                             {status === 'locked' && '🔒 Blocat'}
-
                             {status === 'closed' && '✔ Inchis'}
 
                         </span>
