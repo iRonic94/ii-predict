@@ -7,7 +7,7 @@ function ContestantCard({
     onSelect,
     disabled,
 }) {
-    const imagePath = `${concurent.gender}.webp`;
+    const imagePath = `${concurent.name_id}.jpg`;
 
     const { data } = supabase.storage
         .from('cupluri')
