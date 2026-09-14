@@ -124,27 +124,18 @@ function Vote() {
     };
 
     const handleSubmitVotes = async () => {
-
         if (!profile) {
-
             toast.error(
                 'Your profile is still being created.'
             );
-
             return;
-
         }
-
         if (!selectedEpisode) {
-
             toast.error(
                 'Nu există un episod activ.'
             );
-
             return;
-
         }
-
         const {
             data,
             error,
@@ -258,7 +249,7 @@ function Vote() {
                     Maxim 3 concurenți pot fi selectați (
                     {selectedIds.length} / 3)
                 </p>
-                <h1>Cine credeți că pică in ispită?
+                <h1>Cine credeți că v-a aprinde flacăra ispitei?
                 </h1>
                 {message && (
                     <p className="vote-message">
