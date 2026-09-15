@@ -11,19 +11,20 @@
     flex-direction: column;
 }
 
+.contestant-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, .12);
+}
+
 .contestant-card.disabled {
     opacity: .55;
+    transform: none;
     cursor: not-allowed;
 }
 
 .contestant-card.disabled:hover {
     transform: none;
     border-color: transparent;
-}
-
-.contestant-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(255, 255, 255, .12);
 }
 
 .contestant-card.selected {
@@ -121,6 +122,11 @@
 
 .contestant-button:hover {
     filter: brightness(1.1);
+}
+
+.contestant-button:disabled {
+    cursor: not-allowed;
+    filter: brightness(1);
 }
 
 @media (max-width: 768px) {

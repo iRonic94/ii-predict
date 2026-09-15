@@ -14,17 +14,25 @@ function ContestantCard({
         .getPublicUrl(imagePath);
 
     const imageUrl = data?.publicUrl;
+
     return (
         <article
             className={`contestant-card ${selected ? 'selected' : ''
                 } ${disabled ? 'disabled' : ''
                 }`}
-            onClick={() => onSelect(concurent)}
+            onClick={() => {
+                if (!disabled) {
+                    onSelect(concurent);
+                }
+            }}
         >
-
             <div className="contestant-card-image">
+
                 <img
-                    src={imageUrl || 'https://placehold.co/500x700?text=No+Image'}
+                    src={
+                        imageUrl ||
+                        'https://placehold.co/500x700?text=No+Image'
+                    }
                     alt={concurent.name}
                 />
 
@@ -39,12 +47,15 @@ function ContestantCard({
             </div>
 
             <div className="contestant-card-content">
+
                 <h3>
                     {concurent.name}
                 </h3>
+
                 <button
                     type="button"
                     className="contestant-button"
+                    disabled={disabled}
                 >
                     {selected ? 'Selectat' : 'Selectează'}
                 </button>
