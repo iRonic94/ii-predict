@@ -5,7 +5,6 @@ import './RankingList.scss';
 function RankingList({ users }) {
     return (
         <div className="ranking-list">
-
             {users.map((user, index) => (
                 <RankingRow
                     key={user.id}
@@ -13,7 +12,6 @@ function RankingList({ users }) {
                     position={index + 4}
                 />
             ))}
-
         </div>
     );
 }
