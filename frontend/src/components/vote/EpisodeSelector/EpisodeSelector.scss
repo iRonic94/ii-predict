@@ -30,12 +30,12 @@
 }
 
 .episode-card:hover:not(.locked) {
-    border-color: rgba(255, 255, 255, .15);
+    border-color:$primary;
 }
 
 .episode-card.selected {
     border-color: $primary;
-    box-shadow: 0 0 20px rgba($primary, .35);
+    box-shadow: 0 0 10px rgba($primary, .35);
 }
 
 .episode-card.locked {
