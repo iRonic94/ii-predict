@@ -32,13 +32,14 @@ function UpcomingEpisodeBanner({ episodes }) {
     const totalSeconds = Math.max(0, Math.floor(diff / 1000));
 
     const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds) % 86400 / 3600);
 
     let timer;
 
     if (days >= 1) {
-        timer = `${days} ${days === 1 ? 'zi' : 'zile'}`;
+        timer = `${days} ${days === 1 ? 'zi' : 'zile'} și ${hours} ${hours === 1 ? 'o ora' : 'ore'}`;
     } else {
-        const hours = Math.floor(totalSeconds / 3600);
+        hours = Math.floor(totalSeconds / 3600);
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const seconds = totalSeconds % 60;
 

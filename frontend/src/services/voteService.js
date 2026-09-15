@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabase';
 export async function hasUserVoted(userId, episodeId) {
     return await supabase
         .from('voturi')
-        .select('id')
+        .select('id, concurent_id')
         .eq('user_id', userId)
         .eq('episode_id', episodeId);
 }
