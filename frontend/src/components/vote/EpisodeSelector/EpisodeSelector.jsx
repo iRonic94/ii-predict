@@ -13,13 +13,13 @@ function EpisodeSelector({
 
     const getStatus = (episode) => {
 
+        if (!episode.opens_at || !episode.closes_at) {
+            return 'locked';
+        }
+
         const opensAt = new Date(episode.opens_at);
         const closesAt = new Date(episode.closes_at);
 
-        const isEpisodeOpen =
-            selectedEpisode &&
-            new Date() >= new Date(selectedEpisode.opens_at) &&
-            new Date() <= new Date(selectedEpisode.closes_at);
         if (now < opensAt) {
             return 'locked';
         }
@@ -27,6 +27,7 @@ function EpisodeSelector({
         if (now > closesAt) {
             return 'closed';
         }
+
         return 'active';
     };
 
@@ -54,7 +55,10 @@ function EpisodeSelector({
                                 onSelect(episode);
                             }
                         }}
-                        disabled={!selectable && status !== 'active'}
+                        disabled={
+                            !selectable ||
+                            (status !== 'active' && status !== 'closed')
+                        }
                     >
                         <span className="episode-title">
                             {episode.title}
@@ -63,8 +67,7 @@ function EpisodeSelector({
                         <span className="episode-status">
                             {status === 'active' && '🟢 Votează'}
                             {status === 'locked' && '🔒 Blocat'}
-                            {status === 'closed' && '✔ Inchis'}
-
+                            {status === 'closed' && '✔ Încheiat'}
                         </span>
 
                     </button>

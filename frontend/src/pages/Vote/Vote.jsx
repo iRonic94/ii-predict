@@ -32,6 +32,8 @@ function Vote() {
     const [concurenti, setConcurenti] = useState([]);
     const [selectedIds, setSelectedIds] = useState([]);
 
+    const [previousVoteIds, setPreviousVoteIds] = useState([]);
+
     const [message, setMessage] = useState('');
     const isEpisodeOpen =
         selectedEpisode &&
@@ -69,7 +71,35 @@ function Vote() {
         setSelectedEpisode(activeEpisode ?? null);
 
     };
+    const handleEpisodeSelect = async (episode) => {
 
+        setSelectedEpisode(episode);
+        setSelectedIds([]);
+        setPreviousVoteIds([]);
+
+        const isClosed =
+            episode.opens_at &&
+            episode.closes_at &&
+            new Date() > new Date(episode.closes_at);
+
+        if (!isClosed) {
+            return;
+        }
+
+        const { data, error } = await hasUserVoted(
+            user.id,
+            episode.id
+        );
+
+        if (error) {
+            console.error(error);
+            return;
+        }
+
+        setPreviousVoteIds(
+            data.map((vote) => vote.concurent_id)
+        );
+    };
     const loadConcurenti = async () => {
 
         const { data, error } =
@@ -219,54 +249,38 @@ function Vote() {
 
 
     if (loading || !profile) {
-
         return (
-
             <MainLayout>
-
                 <section className="vote-loading">
-
                     <div className="loading-logo">
-
                         <img
                             src="/assets/iconIIpredict.png"
                             alt="Loading"
                         />
-
                     </div>
-
                     <h2>
                         Preparing your account...
                     </h2>
-
                     <p>
                         Please wait while we finish
                         creating your profile.
                     </p>
-
                 </section>
-
             </MainLayout>
-
         );
-
     }
-
     return (
-
         <MainLayout>
-
             <UpcomingEpisodeBanner
                 episodes={episodes}
             />
             <EpisodeSelector
                 episodes={episodes}
                 selectedEpisode={selectedEpisode}
-                onSelect={setSelectedEpisode}
+                onSelect={handleEpisodeSelect}
+                selectable
             />
-
             <div className="vote-page">
-
                 <p className="vote-info">
                     Maxim 3 concurenți pot fi selectați (
                     {selectedIds.length} / 3)
@@ -278,37 +292,33 @@ function Vote() {
                         {message}
                     </p>
                 )}
-
                 {concurenti.length === 0 ? (
 
                     <p className="empty-state">
                         Nu există concurenți activi.
                     </p>
-
                 ) : (
-
                     <div className="contestants-grid">
-
                         {concurenti.map((concurent) => (
-
                             <ContestantCard
                                 key={concurent.id}
                                 concurent={concurent}
-                                selected={selectedIds.includes(concurent.id)}
+                                selected={
+                                    isEpisodeOpen
+                                        ? selectedIds.includes(concurent.id)
+                                        : previousVoteIds.includes(concurent.id)
+                                }
                                 disabled={!isEpisodeOpen}
                                 onSelect={handleSelect}
                             />
-
                         ))}
-
                     </div>
-
                 )}
-
                 <Button
                     type="button"
                     fullWidth
                     disabled={
+                        !isEpisodeOpen ||
                         selectedIds.length === 0 ||
                         !selectedEpisode
                     }
@@ -316,9 +326,7 @@ function Vote() {
                 >
                     Votează!
                 </Button>
-
             </div>
-
         </MainLayout>
 
     );

@@ -17,7 +17,9 @@ function UpcomingEpisodeBanner({ episodes }) {
     }, []);
 
     const nextEpisode = episodes.find(
-        (episode) => new Date(episode.opens_at) > now
+        (episode) =>
+            episode.opens_at &&
+            new Date(episode.opens_at) > now
     );
 
     if (!nextEpisode) {
@@ -27,29 +29,35 @@ function UpcomingEpisodeBanner({ episodes }) {
     const diff =
         new Date(nextEpisode.opens_at).getTime() - now.getTime();
 
-    const totalSeconds = Math.floor(diff / 1000);
+    const totalSeconds = Math.max(0, Math.floor(diff / 1000));
 
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
+    const days = Math.floor(totalSeconds / 86400);
 
-    const timer =
-        `${String(hours).padStart(2, '0')}:` +
-        `${String(minutes).padStart(2, '0')}:` +
-        `${String(seconds).padStart(2, '0')}`;
+    let timer;
+
+    if (days >= 1) {
+        timer = `${days} ${days === 1 ? 'zi' : 'zile'}`;
+    } else {
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        timer =
+            `${String(hours).padStart(2, '0')}:` +
+            `${String(minutes).padStart(2, '0')}:` +
+            `${String(seconds).padStart(2, '0')}`;
+    }
 
     return (
         <section className="upcoming-banner">
-
             <h3 className="upcoming-title">
-                EP.{nextEpisode.episode_number} se deschide in <span class="upcoming-timer">{timer}</span>
-
+                EP.{nextEpisode.episode_number} se deschide în{' '}
+                <span className="upcoming-timer">
+                    {timer}
+                </span>
             </h3>
-
-
         </section>
     );
-
 }
 
 export default UpcomingEpisodeBanner;
