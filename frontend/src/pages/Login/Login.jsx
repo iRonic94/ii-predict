@@ -10,13 +10,13 @@ import { ROUTES } from '../../constants/routes';
 
 import { signInWithGoogle } from '../../services/authService';
 
-import icon from '../../../public/iconiipredict.png';
 
 import './Login.scss';
 
 function Login() {
 
     const navigate = useNavigate();
+    const icon = "/iconIIpredict.png";
 
     const { login } = useAuth();
 
