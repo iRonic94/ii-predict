@@ -2,25 +2,16 @@ import './AuthLayout.scss';
 
 function AuthLayout({
     title,
-    subtitle,
+    titleClassName = '',
     children,
 }) {
     return (
         <div className="auth-page">
-
             <div className="auth-card">
-
-                <h1>{title}</h1>
-                {subtitle && (
-                    <p className="auth-subtitle">
-                        {subtitle}
-                    </p>
-                )}
-
+                <h1 className={titleClassName}>{title}</h1>
                 {children}
 
             </div>
-
         </div>
     );
 }

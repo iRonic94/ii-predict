@@ -92,6 +92,19 @@
   color: #f59e0b;
 }
 
+.login-title-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: .4rem;
+}
+
+.login-title{
+    display:flex;
+    justify-content: center;
+    gap:5px;
+}
 @media(max-width:768px) {
 
     .login-form {

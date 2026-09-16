@@ -10,6 +10,8 @@ import { ROUTES } from '../../constants/routes';
 
 import { signInWithGoogle } from '../../services/authService';
 
+import icon from '../../../public/iconiipredict.png';
+
 import './Login.scss';
 
 function Login() {
@@ -83,8 +85,19 @@ function Login() {
     };
 
     return (
-
-        <AuthLayout title="Logare👹👇">
+        <AuthLayout
+            titleClassName="login-title"
+            title={
+                <>
+                    Insula predicției
+                    <img
+                        src={icon}
+                        alt=""
+                        className="login-title-icon"
+                    />
+                </>
+            }
+        >
             <form
                 className="login-form"
                 onSubmit={handleSubmit}
