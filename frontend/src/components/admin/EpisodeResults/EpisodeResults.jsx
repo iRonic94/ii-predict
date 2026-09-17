@@ -31,17 +31,12 @@ function EpisodeResults({
     }, [episode]);
 
     const handleSelect = (concurent) => {
-
         setSelectedIds((prev) => {
-
             if (prev.includes(concurent.id)) {
                 return prev.filter((id) => id !== concurent.id);
             }
-
             return [...prev, concurent.id];
-
         });
-
     };
 
     const handleValidate = async () => {
@@ -66,13 +61,15 @@ function EpisodeResults({
             concurent_id: concurentId,
         }));
 
-        const {
-            error: insertError,
-        } = await saveEpisodeResults(results);
+        if (results.length > 0) {
+            const {
+                error: insertError,
+            } = await saveEpisodeResults(results);
 
-        if (insertError) {
-            console.error(insertError);
-            return;
+            if (insertError) {
+                console.error(insertError);
+                return;
+            }
         }
 
         const {
@@ -160,7 +157,6 @@ function EpisodeResults({
             <Button
                 type="button"
                 fullWidth
-                disabled={selectedIds.length === 0}
                 onClick={handleValidate}
             >
                 {validateEpisodeSwitch
@@ -168,7 +164,7 @@ function EpisodeResults({
                     : 'Save Results'}
             </Button>
 
-        </section>
+        </section >
 
     );
 

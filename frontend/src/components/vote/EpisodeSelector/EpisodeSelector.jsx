@@ -7,6 +7,7 @@ function EpisodeSelector({
     selectedEpisode,
     onSelect,
     selectable = false,
+    allowAdmin = false,
 }) {
 
     const now = useNow();
@@ -57,7 +58,7 @@ function EpisodeSelector({
                         }}
                         disabled={
                             !selectable ||
-                            (status !== 'active' && status !== 'closed')
+                            (!allowAdmin && status !== 'active' && status !== 'closed')
                         }
                     >
                         <span className="episode-title">

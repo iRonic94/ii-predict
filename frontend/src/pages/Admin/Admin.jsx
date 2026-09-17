@@ -67,6 +67,7 @@ function Admin() {
                     selectedEpisode={selectedEpisode}
                     selectable
                     onSelect={setSelectedEpisode}
+                    allowAdmin
                 />
 
                 {selectedEpisode && (
