@@ -50,6 +50,7 @@ function EpisodeSelector({
                             episode-card
                             ${status}
                             ${isSelected ? 'selected' : ''}
+                             ${allowAdmin ? 'admin-panel' : ''}
                         `}
                         onClick={() => {
                             if (selectable && onSelect) {
