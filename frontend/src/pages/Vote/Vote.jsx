@@ -155,17 +155,12 @@ function Vote() {
             }
 
             if (prev.length >= 3) {
-
                 toast.error(
-                    'Poți selecta maxim 3 concurenți.'
+                    'Poți alege trei concurenți!'
                 );
-
                 return prev;
-
             }
-
             setMessage('');
-
             return [
                 ...prev,
                 concurent.id,
@@ -178,13 +173,19 @@ function Vote() {
     const handleSubmitVotes = async () => {
         if (!profile) {
             toast.error(
-                'Your profile is still being created.'
+                'Profilul tău incă e in procesul de creare.'
             );
             return;
         }
         if (!selectedEpisode) {
             toast.error(
                 'Nu există un episod activ.'
+            );
+            return;
+        }
+        if (selectedIds.length !== 3) {
+            toast.error(
+                'Trebuie să alegi exact 3 concurenți.'
             );
             return;
         }
@@ -195,25 +196,16 @@ function Vote() {
             user.id,
             selectedEpisode.id
         );
-
         if (error) {
-
             console.error(error);
-
             return;
-
         }
-
         if (data.length > 0) {
-
             toast.error(
                 'Ai votat deja pentru acest episod.'
             );
-
             return;
-
         }
-
         const votes = selectedIds.map(
             (concurentId) => ({
                 user_id: user.id,
@@ -221,32 +213,21 @@ function Vote() {
                 concurent_id: concurentId,
             })
         );
-
         const {
             error: insertError,
         } = await submitVotes(votes);
-
         if (insertError) {
-
             console.error(insertError);
-
             setMessage(
                 insertError.message
             );
-
             return;
-
         }
-
         setSelectedIds([]);
-
         toast.success(
             'Voturile au fost înregistrate cu succes!'
         );
-
     };
-
-
 
     if (loading || !profile) {
         return (
@@ -282,7 +263,7 @@ function Vote() {
             />
             <div className="vote-page">
                 <p className="vote-info">
-                    Maxim 3 concurenți pot fi selectați (
+                    Selectează 3 concurenți (
                     {selectedIds.length} / 3)
                 </p>
                 <h1>Cine credeți că va aprinde flacăra ispitei?
@@ -319,7 +300,7 @@ function Vote() {
                     fullWidth
                     disabled={
                         !isEpisodeOpen ||
-                        selectedIds.length === 0 ||
+                        selectedIds.length != 3 ||
                         !selectedEpisode
                     }
                     onClick={handleSubmitVotes}
