@@ -16,18 +16,51 @@ function UpcomingEpisodeBanner({ episodes }) {
 
     }, []);
 
+    // Episodul care este în desfășurare acum
+    const activeEpisode = episodes.find((episode) => {
+
+        if (!episode.opens_at || !episode.closes_at) {
+            return false;
+        }
+
+        const opensAt = new Date(episode.opens_at);
+        const closesAt = new Date(episode.closes_at);
+
+        return now >= opensAt && now <= closesAt;
+
+    });
+
+    // Următorul episod care urmează să se deschidă
     const nextEpisode = episodes.find(
         (episode) =>
             episode.opens_at &&
             new Date(episode.opens_at) > now
     );
 
-    if (!nextEpisode) {
+    let targetDate;
+    let message;
+    let episodeNumber;
+
+    if (activeEpisode) {
+
+        targetDate = new Date(activeEpisode.closes_at);
+        message = `EP.${activeEpisode.episode_number} se închide în`;
+        episodeNumber = activeEpisode.episode_number;
+
+    } else if (nextEpisode) {
+
+        targetDate = new Date(nextEpisode.opens_at);
+        message = `EP.${nextEpisode.episode_number} se deschide în`;
+        episodeNumber = nextEpisode.episode_number;
+
+    } else {
+
         return null;
+
     }
 
     const diff =
-        new Date(nextEpisode.opens_at).getTime() - now.getTime();
+        targetDate.getTime() - now.getTime();
 
     const totalSeconds = Math.max(
         0,
@@ -72,11 +105,13 @@ function UpcomingEpisodeBanner({ episodes }) {
         <section className="upcoming-banner">
 
             <h3 className="upcoming-title">
-                EP.{nextEpisode.episode_number} se deschide în{' '}
+
+                {message}{' '}
 
                 <span className="upcoming-timer">
                     {timer}
                 </span>
+
             </h3>
 
         </section>
