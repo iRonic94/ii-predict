@@ -6,6 +6,17 @@ const supabase = createClient(
     process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
+console.log('SUPABASE_URL exists:', !!process.env.SUPABASE_URL);
+console.log(
+    'SUPABASE_SERVICE_ROLE_KEY exists:',
+    !!process.env.SUPABASE_SERVICE_ROLE_KEY
+);
+
+console.log(
+    'SUPABASE_SERVICE_ROLE_KEY length:',
+    process.env.SUPABASE_SERVICE_ROLE_KEY?.length
+);
+
 export default async function handler(req, res) {
     if (req.method !== 'GET') {
         return res.status(405).json({
