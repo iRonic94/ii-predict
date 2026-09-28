@@ -14,7 +14,30 @@ export default async function handler(req, res) {
 
         const response = await ai.models.generateContent({
             model: 'gemini-3.8-flash',
-            contents: 'Răspunde doar cu: Gemini funcționează!',
+            contents: `
+                Caută pe internet informații actuale despre
+                următoarea difuzare a emisiunii "Insula Iubirii"
+                din România.
+
+                Vreau să afli:
+                1. Care este următorul episod care urmează să fie difuzat.
+                2. Data difuzării.
+                3. Ora difuzării.
+                4. Sursele care confirmă informația.
+
+                Nu presupune informații.
+                Dacă nu poți confirma data și ora, spune clar acest lucru.
+
+                Răspunde STRICT în format JSON,
+                fără markdown și fără text înainte sau după JSON.
+            `,
+            config: {
+                tools: [
+                    {
+                        googleSearch: {},
+                    },
+                ],
+            },
         });
 
         return res.status(200).json({
@@ -23,7 +46,7 @@ export default async function handler(req, res) {
         });
 
     } catch (error) {
-        console.error('Gemini error:', error);
+        console.error('Gemini Search error:', error);
 
         return res.status(500).json({
             success: false,
