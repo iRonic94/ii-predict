@@ -69,7 +69,7 @@ export default async function handler(req, res) {
 
                     query: `
                         Caută informații actuale și verificabile despre
-                        emisiunea "Insula Iubirii" din România.
+                        emisiunea Insula Iubirii strict pentru sezonul 10 din România.
 
                         Verifică următoarele:
 
