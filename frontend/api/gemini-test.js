@@ -13,7 +13,7 @@ export default async function handler(req, res) {
         });
 
         const response = await ai.models.generateContent({
-            model: 'gemini-3.8-flash',
+            model: 'gemini-2.5-flash',
             contents: `
                 Caută pe internet informații actuale despre
                 următoarea difuzare a emisiunii "Insula Iubirii"
