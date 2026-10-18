@@ -289,7 +289,8 @@ function Vote() {
                                         ? selectedIds.includes(concurent.id)
                                         : previousVoteIds.includes(concurent.id)
                                 }
-                                disabled={!isEpisodeOpen}
+                                disabled={!isEpisodeOpen || concurent.cuplu_number === 6}
+                                eliminated={concurent.cuplu_number === 6}
                                 onSelect={handleSelect}
                             />
                         ))}

@@ -124,6 +124,8 @@ function EpisodeResults({
                         concurent={concurent}
                         selected={selectedIds.includes(concurent.id)}
                         onSelect={handleSelect}
+                        eliminated={concurent.cuplu_number === 6}
+                        disabled={concurent.cuplu_number === 6}
                     />
 
                 ))}

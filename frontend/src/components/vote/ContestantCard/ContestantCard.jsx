@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { supabase } from '../../../lib/supabase';
 import './ContestantCard.scss';
 
@@ -5,9 +6,12 @@ function ContestantCard({
     concurent,
     selected = false,
     onSelect,
-    disabled,
+    disabled = false,
+    eliminated = false,
 }) {
-    const imagePath = `${concurent.name_id}.jpg`;
+    const [extension, setExtension] = useState('jpg');
+
+    const imagePath = `${concurent.name_id}.${extension}`;
 
     const { data } = supabase.storage
         .from('cupluri')
@@ -22,20 +26,29 @@ function ContestantCard({
                 }`}
             onClick={() => {
                 if (!disabled) {
-                    onSelect(concurent);
+                    onSelect?.(concurent);
                 }
             }}
         >
             <div className="contestant-card-image">
-
                 <img
-                    src={
-                        imageUrl ||
-                        'https://placehold.co/500x700?text=No+Image'
-                    }
+                    src={imageUrl}
                     alt={concurent.name}
+                    onError={(event) => {
+                        if (extension === 'jpg') {
+                            setExtension('png');
+                        } else {
+                            event.currentTarget.onerror = null;
+                            event.currentTarget.src =
+                                'https://placehold.co/500x700?text=No+Image';
+                        }
+                    }}
                 />
-
+                {eliminated && (
+                    <div className="eliminated-overlay">
+                        <span>ELIMINAT</span>
+                    </div>
+                )}
                 {selected && (
                     <div className="selected-overlay">
                         <div className="selected-circle">
@@ -43,14 +56,10 @@ function ContestantCard({
                         </div>
                     </div>
                 )}
-
             </div>
 
             <div className="contestant-card-content">
-
-                <h3>
-                    {concurent.name}
-                </h3>
+                <h3>{concurent.name}</h3>
 
                 <button
                     type="button"
@@ -59,9 +68,7 @@ function ContestantCard({
                 >
                     {selected ? 'Selectat' : 'Selectează'}
                 </button>
-
             </div>
-
         </article>
     );
 }
